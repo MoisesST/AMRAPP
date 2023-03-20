@@ -1,3 +1,4 @@
+import { CustomMap } from '../components/CustomMap';
 import {
   Container,
   Footer,
@@ -8,6 +9,7 @@ export function Main() {
   return (
     <>
       <Container>
+        <CustomMap />
       </Container>
       <Footer>
         <FooterContainer>
