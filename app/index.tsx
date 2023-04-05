@@ -1,7 +1,6 @@
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-
-import { CustomMap } from '../src/components/CustomMap';
+import { Main } from '../src/Main';
 
 function App() {
   const [isFontsLoaded] = useFonts({
@@ -17,7 +16,7 @@ function App() {
   return (
     <>
       <StatusBar style='dark' />
-      <CustomMap />
+      <Main />
     </>
   );
 }
