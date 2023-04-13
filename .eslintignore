@@ -1,0 +1,12 @@
+expo/
+assets/
+node_modules/
+.editorconfig
+.eslintrc
+.gitignore
+app.json
+babel.config
+commitlint.config.js
+package.json
+tsconfig.json
+yarn.lock
