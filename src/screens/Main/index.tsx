@@ -1,6 +1,6 @@
-import { Header } from '../components/Header';
-import { Lines } from '../components/Lines';
-import { StoppingPoints } from '../components/StoppingPoints';
+import { Header } from '../../components/Header';
+import { Lines } from '../../components/Lines';
+import { StoppingPoints } from '../../components/StoppingPoints';
 import {
   Container,
   LinesContainer,

@@ -1,5 +1,5 @@
 import { FlatList } from 'react-native';
-import { Text } from '../../global/Text';
+import { Text } from '../../screens/global/Text';
 import { Container, IconContainer, PointNameContainer, TimeContainer } from './styles';
 import { workingDays } from '../../mocks/workingDays';
 import { MaterialIcons } from '@expo/vector-icons';
