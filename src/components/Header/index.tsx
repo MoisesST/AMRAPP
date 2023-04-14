@@ -1,5 +1,5 @@
 import { Container } from './styles';
-import { Text } from '../../screens/global/Text';
+import { Text } from '../../global/Text';
 
 export function Header() {
   return (

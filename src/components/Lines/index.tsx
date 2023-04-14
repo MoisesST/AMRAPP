@@ -1,6 +1,6 @@
 import { lines } from '../../mocks/lines';
 import { FlatList } from 'react-native';
-import { Text } from '../../screens/global/Text';
+import { Text } from '../../global/Text';
 import { Line } from './styles';
 import { useState } from 'react';
 
