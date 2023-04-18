@@ -54,15 +54,11 @@ export function Points() {
               <MaterialIcons name="location-pin" size={18} color="black" />
             </IconContainer>
             <PointNameContainer>
-              <Text size={14} weight='400'>
-                {point.name}
-              </Text>
+              <Text size={14} weight='400'>{point.name}</Text>
             </PointNameContainer>
             <TimeContainer>
               <Text size={14} weight='700' color='#a2ffa2'>
-                {
-                  point.schedules.find(time => time >= currentTime)
-                }
+                {point.schedules.find(time => time >= currentTime)}
               </Text>
             </TimeContainer>
             <Text></Text>
