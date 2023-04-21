@@ -27,6 +27,7 @@ function App() {
     return null;
   }
 
+<<<<<<< HEAD
   //return <Router />; //verificar uso
 
   return (
@@ -35,6 +36,16 @@ function App() {
       <Main />
     </ThemeContextProvider>
   );
+=======
+  return <Router />; //verificar uso
+
+  /*return (
+    <>
+      <StatusBar style='dark' />
+      <Main />
+    </>
+  );*/
+>>>>>>> 624a0c2 (feat(add cad page e router): create a cad page, confif firebase and router)
 }
 
 export default App;
