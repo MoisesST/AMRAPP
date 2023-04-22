@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import { Platform, StatusBar } from 'react-native';
 
 const isAndroid = Platform.OS === 'android';
@@ -14,13 +15,22 @@ export const LinesContainer = styled.View`
   margin-top: 34px;
 `;
 
-export const StoppingPointsContainer = styled.View`
+export const PointsContainer = styled.View`
   flex: 1;
 `;
 
 export const Footer = styled.View`
-  min-height: 110px;
+  height: 70px;
   background: #fff;
 `;
 
-export const FooterContainer = styled.SafeAreaView``;
+export const FooterContainer = styled.SafeAreaView`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const MapButton = styled.TouchableOpacity``;
+
+export const SearchButton = styled.TouchableOpacity``;

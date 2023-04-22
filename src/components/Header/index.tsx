@@ -1,7 +1,7 @@
 import { Container } from './styles';
 import { Text } from '../../global/Text';
 
-export function Header() {
+function Header() {
   return (
     <Container>
       <Text size={14} opacity={0.9}>Bem vindo(a) ao</Text>
@@ -12,3 +12,4 @@ export function Header() {
     </Container>
   );
 }
+export { Header };

@@ -1,26 +1,9 @@
 import styled from 'styled-components/native';
 
-export const PointContainer = styled.TouchableOpacity`
+export const Container = styled.TouchableOpacity`
+  height: 40px;
   flex-direction: row;
-`;
-
-export const IconContainer = styled.View`
-  height: 40px;
-  margin-right: 24px;
-  justify-content: center;
-`;
-
-export const PointNameContainer = styled.View`
-  height: 40px;
-  justify-content: center;
-`;
-
-export const TimeContainer = styled.View`
-  height: 40px;
-  width: 50%;
-  flex: 1;
-  justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 `;
 
 export const Separator = styled.View`

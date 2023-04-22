@@ -1,10 +1,12 @@
-import { lines } from '../../mocks/lines';
-import { FlatList } from 'react-native';
-import { Text } from '../../global/Text';
-import { Line } from './styles';
 import { useState } from 'react';
 
-export function Lines() {
+import { FlatList } from 'react-native';
+
+import { lines } from '../../mocks/lines';
+import { Text } from '../../global/Text';
+import { Line } from './styles';
+
+function Lines() {
   const [selectedLine, setSelectedLine] = useState('');
 
   function handleSelectLine(lineId: string) {
@@ -38,3 +40,4 @@ export function Lines() {
     />
   );
 }
+export { Lines };

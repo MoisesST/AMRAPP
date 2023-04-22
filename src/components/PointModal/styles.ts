@@ -23,15 +23,6 @@ export const SchedulesContainer = styled.View`
   margin-top: 32px;
 `;
 
-export const TimeButton = styled.TouchableOpacity`
-  border: 1px solid rgba(204, 204, 204, 0.3);
-  border-radius: 8px;
-  padding: 16px;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 4px;
-`;
-
 export const Footer = styled.View`
   min-height: 110px;
   background: #fff;
@@ -44,13 +35,7 @@ export const FooterContainer = styled.SafeAreaView`
   justify-content: space-between;
 `;
 
-export const PreviousContainer = styled.View`
-  padding: 16px;
-  border: 1px solid rgba(204, 204, 204, 0.3);
-  border-radius: 8px;
-`;
-
-export const NextContainer = styled.View`
+export const HighlightedTimeContainer = styled.View`
   padding: 16px;
   border: 1px solid rgba(204, 204, 204, 0.3);
   border-radius: 8px;

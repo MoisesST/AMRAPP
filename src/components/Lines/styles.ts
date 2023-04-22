@@ -1,4 +1,5 @@
 import styled  from 'styled-components/native';
+
 import { Platform } from 'react-native';
 
 const isAndroid = Platform.OS === 'android';
@@ -11,5 +12,4 @@ export const Line = styled.TouchableOpacity`
   align-items: center;
   border-radius: 10px;
   box-shadow: 0px 2px 1px rgba(0, 0, 0, ${isAndroid ? 1 : 0.1});
-  elevation: 2;
 `;

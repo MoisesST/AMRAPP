@@ -1,6 +1,8 @@
 import { useFonts } from 'expo-font';
+
 import { StatusBar } from 'expo-status-bar';
-import { Main } from '../src/screens/Main';
+
+import { Main } from '../src/Main';
 
 function App() {
   const [isFontsLoaded] = useFonts({
@@ -15,7 +17,7 @@ function App() {
 
   return (
     <>
-      <StatusBar style='dark' />
+      <StatusBar style='light' backgroundColor='#000' />
       <Main />
     </>
   );
