@@ -1,9 +1,12 @@
 import { useState } from 'react';
+
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+
 import { Header } from '../components/Header';
 import { Lines } from '../components/Lines';
 import { Points } from '../components/Points';
 import { MapModal } from '../components/MapModal';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { SearchModal } from '../components/SearchModal';
 import {
   Container,
   LinesContainer,
@@ -14,16 +17,12 @@ import {
   SearchButton,
 } from './styles';
 
-export function Main() {
+function Main() {
   const [isMapModalVisible, setMapModalVisible] = useState(false);
+  const [isSearchModalVisible, setSearchModalVisible] = useState(false);
 
   return (
     <>
-      <MapModal
-        visible={isMapModalVisible}
-        onClose={() => setMapModalVisible(false)}
-      />
-
       <Container>
         <Header />
 
@@ -34,8 +33,8 @@ export function Main() {
         <PointsContainer>
           <Points />
         </PointsContainer>
-
       </Container>
+
       <Footer>
         <FooterContainer>
           <MapButton
@@ -44,11 +43,24 @@ export function Main() {
             <FontAwesome5 name="map" size={40} color="black" />
           </MapButton>
 
-          <SearchButton>
+          <SearchButton
+            onPress={() => setSearchModalVisible(true)}
+          >
             <Ionicons name="md-search" size={40} color="black" />
           </SearchButton>
         </FooterContainer>
       </Footer>
+
+      <MapModal
+        visible={isMapModalVisible}
+        onClose={() => setMapModalVisible(false)}
+      />
+
+      <SearchModal
+        visible={isSearchModalVisible}
+        onClose={() => setSearchModalVisible(false)}
+      />
     </>
   );
 }
+export { Main };

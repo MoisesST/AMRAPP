@@ -25,14 +25,4 @@ export const Header = styled.View`
 export const Form = styled.View`
   flex-direction: row;
   margin-top: 32px;
-  /* background: #f00; */
-`;
-
-export const Input = styled.TextInput`
-  flex: 1;
-  margin-right: 24px;
-  padding: 16px;
-  border: 1px solid rgba(204, 204, 204, 0.5);
-  border-radius: 8px;
-  background: #fff;
 `;

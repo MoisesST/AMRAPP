@@ -1,20 +1,22 @@
 import { useState } from 'react';
+
 import { FlatList, Modal } from 'react-native';
-import { Text } from '../../global/Text';
-import { Point } from '../../types/Point';
+
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { Point } from '../../types/Point';
 import { TimeModal } from '../TimeModal';
+import { Text } from '../../global/Text';
+import { TimeButton } from '../TimeButton';
 import {
   Image,
   CloseButton,
   ModalBody,
   Header,
   SchedulesContainer,
-  TimeButton,
   Footer,
   FooterContainer,
-  PreviousContainer,
-  NextContainer,
+  HighlightedTimeContainer,
 } from './styles';
 
 interface PointModalProps {
@@ -23,7 +25,7 @@ interface PointModalProps {
   point: null | Point;
 }
 
-export function PointModal({ visible, onClose, point }: PointModalProps) {
+function PointModal({ visible, onClose, point }: PointModalProps) {
   if (!point) {
     return null;
   }
@@ -31,22 +33,16 @@ export function PointModal({ visible, onClose, point }: PointModalProps) {
   const [selectedTime, setSelectedTime] = useState('');
   const [isTimeModalVisible, setTimeModalVisible] = useState(false);
 
-  function handleOpenModal(time: string) {
-    setTimeModalVisible(true);
-    setSelectedTime(time);
-  }
-
   const now = new Date();
   const options = { timeZone: 'America/Sao_Paulo' };
   const currentTime = now.toLocaleTimeString('pt-BR', options);
 
-  // Test
-  // const currentTime = '07:05';
-  // const currentTime = '07:06';
-  // const currentTime = '13:00';
-  // const currentTime = '22:05';
-  // const currentTime = '22:06';
-  // const currentTime = '00:00';
+  function handleOpenModal(time: string) {
+    if (time > currentTime) {
+      setTimeModalVisible(true);
+      setSelectedTime(time);
+    }
+  }
 
   const nextBusTime = point.schedules.find(time => time >= currentTime);
   const nextBusTimeIndex = point.schedules.indexOf(nextBusTime!);
@@ -99,14 +95,10 @@ export function PointModal({ visible, onClose, point }: PointModalProps) {
                 renderItem={({item: time}) => (
                   <TimeButton
                     onPress={() => handleOpenModal(time)}
-                    style={{
-                      backgroundColor: `${
-                        time < nextBusTime!
-                          ? '#ffb6b6'
-                          : `${time === nextBusTime ? '#a2ffa2' : '#fafafa'}`
-                      }`
-                    }}>
+                    disabled={time < nextBusTime!}
+                  >
                     <MaterialCommunityIcons name="clock" size={14} color="black" />
+
                     <Text size={14} color='#666' style={{ marginLeft: 20 }}>
                       {time}
                     </Text>
@@ -119,7 +111,7 @@ export function PointModal({ visible, onClose, point }: PointModalProps) {
 
         <Footer>
           <FooterContainer>
-            <PreviousContainer style={{
+            <HighlightedTimeContainer style={{
               backgroundColor: `${
                 (currentTime <= firstSchedule) || (currentTime > lastSchedule)
                   ? '#fafafa'
@@ -130,9 +122,9 @@ export function PointModal({ visible, onClose, point }: PointModalProps) {
               <Text size={20} weight='600'>
                 {previousBusTime}
               </Text>
-            </PreviousContainer>
+            </HighlightedTimeContainer>
 
-            <NextContainer style={{
+            <HighlightedTimeContainer style={{
               backgroundColor: `${
                 currentTime > lastSchedule
                   ? '#fafafa'
@@ -143,10 +135,11 @@ export function PointModal({ visible, onClose, point }: PointModalProps) {
               <Text size={20} weight='600'>
                 {nextBusTime}
               </Text>
-            </NextContainer>
+            </HighlightedTimeContainer>
           </FooterContainer>
         </Footer>
       </Modal>
     </>
   );
 }
+export { PointModal };

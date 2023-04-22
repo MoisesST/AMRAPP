@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import { Platform, StatusBar } from 'react-native';
 
 const isAndroid = Platform.OS === 'android';
@@ -19,7 +20,6 @@ export const PointsContainer = styled.View`
 `;
 
 export const Footer = styled.View`
-  /* min-height: 110px; */
   height: 70px;
   background: #fff;
 `;

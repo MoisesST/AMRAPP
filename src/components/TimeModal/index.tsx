@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Modal, Platform, Switch } from 'react-native';
-import { Text } from '../../global/Text';
+
+import { Switch } from 'react-native';
+
 import * as Notifications from 'expo-notifications';
-import { Ionicons } from '@expo/vector-icons';
-import { Overlay, ModalBody, CloseButton, Header, Form, Input } from './styles';
+
+import { TransparentModal } from '../TransparentModal';
+import { Input } from '../Input';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -19,22 +21,15 @@ interface TimeModalProps {
   time: string;
 }
 
-export function TimeModal({ visible, onClose, time }: TimeModalProps) {
+function TimeModal({ visible, onClose, time }: TimeModalProps) {
   const [minute, setMinute] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
 
   function toggleSwitch() {
-    if (isEnabled) {
-      alert('Notificação ativa:' + time);
-      handleSave();
-      setMinute('');
-      notification(Number(minute));
-    } else {
-      alert('Notificação desativa' + time);
-      handleSave();
-      setMinute('');
-      notification(Number(minute));
-    }
+    alert('Você será notificado');
+    handleSave();
+    setMinute('');
+    notification(Number(minute));
     return setIsEnabled(false);
   }
 
@@ -50,10 +45,6 @@ export function TimeModal({ visible, onClose, time }: TimeModalProps) {
     });
   }
 
-  const now = new Date();
-  const options = { timeZone: 'America/Sao_Paulo' };
-  const currentTime = now.toLocaleTimeString('pt-BR', options);
-
   function handleNotificationTime(timeInMinutes: number) {
     const timeInSeconds = timeInMinutes * 60;
     return timeInSeconds;
@@ -66,43 +57,26 @@ export function TimeModal({ visible, onClose, time }: TimeModalProps) {
   console.log(Number(minute));
 
   return (
-    <>
-      <Modal
-        visible={visible}
-        transparent
-        animationType='fade'
-        onRequestClose={onClose}
-      >
-        <Overlay
-          behavior={Platform.OS === 'android' ? 'height' : 'padding'}
-        >
-          <ModalBody>
-            <Header>
-              <Text weight='600'>Lembrar</Text>
-              <CloseButton onPress={onClose}>
-                <Ionicons name="close" size={20} color="#666" />
-              </CloseButton>
-            </Header>
+    <TransparentModal
+      visible={visible}
+      onClose={onClose}
+      title='Lembrar'
+    >
+      <Input
+        placeholder='Informe quantos minutos'
+        onChangeText={setMinute}
+        keyboardType='number-pad'
+      />
 
-            <Form>
-              <Input
-                placeholder='Informe quantos minutos'
-                placeholderTextColor='#666'
-                keyboardType='number-pad'
-                onChangeText={setMinute}
-              />
-
-              <Switch
-                disabled={minute.length === 0}
-                trackColor={{ false: '#ffb6b6', true: '#a2ffa2' }}
-                thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </Form>
-          </ModalBody>
-        </Overlay>
-      </Modal>
-    </>
+      <Switch
+        disabled={minute.length === 0}
+        trackColor={{ false: '#ffb6b6', true: '#a2ffa2' }}
+        thumbColor={'#f4f3f4'}
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+        style={{ marginLeft: 24 }}
+      />
+    </TransparentModal>
   );
 }
+export { TimeModal };

@@ -1,6 +1,10 @@
 import { Modal, ActivityIndicator } from 'react-native';
-import { ExpoLeaflet, MapLayer, MapMarker } from 'expo-leaflet';
+
+import { ExpoLeaflet, MapLayer } from 'expo-leaflet';
+
 import { AntDesign } from '@expo/vector-icons';
+
+import { markers } from '../../mocks/markers';
 import { CloseButton } from './styles';
 
 const mapLayer: MapLayer = {
@@ -18,16 +22,7 @@ interface MapModalProps {
   onClose: () => void;
 }
 
-export function MapModal({ visible, onClose }: MapModalProps) {
-  const markers: MapMarker[] = [
-    {
-      id: '1',
-      position: { lat: -25.34936, lng: -51.4788 },
-      icon: '<div style=\'color:blue\'>⚑</div>', // This icon should be an HTML Element because it's rendered inside a webview!
-      size: [24, 24],
-    },
-  ];
-
+function MapModal({ visible, onClose }: MapModalProps) {
   return (
     <Modal
       visible={visible}
@@ -55,3 +50,4 @@ export function MapModal({ visible, onClose }: MapModalProps) {
     </Modal>
   );
 }
+export { MapModal };
