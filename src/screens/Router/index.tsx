@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //import { Button } from "react-native";
 //import useAuth from "../../hooks/useAuth";
 import { StatusBar } from 'expo-status-bar';
-import { Main } from '../../screens/Main';
+import { Main } from '../Main';
+import {Link} from "expo-router"
 //import Login from "../screens/Login";
 //import Recipe from "../screens/Recipe";
 
@@ -33,10 +34,11 @@ export default function Router() {
     </NavigationContainer>
   );*/
 
-  return (
+  /*return (
     <>
       <StatusBar style='dark' />
       <Main />
     </>
-  );
+  );*/
+
 }
