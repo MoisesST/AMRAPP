@@ -6,8 +6,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Main } from '../src/Main';
 
 function App() {
-  const firebaseApp = useFirebase(firebaseConfig);
-  if (firebaseApp == null) return <div>Loading...</div>;
+  //const firebaseApp = useFirebase(firebaseConfig);
+  //if (firebaseApp == null) return <div>Loading...</div>;
 
   const [isFontsLoaded] = useFonts({
     'GeneralSans-400': require('../assets/fonts/GeneralSans-Regular.otf'),
