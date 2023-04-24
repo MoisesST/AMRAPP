@@ -40,10 +40,6 @@ export default function Router() {
       <Main />
     </>
 <<<<<<< HEAD
+<<<<<<< HEAD
   );
 }*/
-=======
-  );*/
-
-}
->>>>>>> 48b1d16 (refactor(test expo router): test expo router)
