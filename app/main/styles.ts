@@ -34,3 +34,5 @@ export const FooterContainer = styled.SafeAreaView`
 export const MapButton = styled.TouchableOpacity``;
 
 export const SearchButton = styled.TouchableOpacity``;
+
+export const AdminButton = styled.TouchableOpacity``;

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-import { Header } from '../components/Header';
-import { Lines } from '../components/Lines';
-import { Points } from '../components/Points';
-import { MapModal } from '../components/MapModal';
-import { SearchModal } from '../components/SearchModal';
+import { Header } from '../../src/components/Header';
+import { Lines } from '../../src/components/Lines';
+import { Points } from '../../src/components/Points';
+import { MapModal } from '../../src/components/MapModal';
+import { SearchModal } from '../../src/components/SearchModal';
 import {
   Container,
   LinesContainer,
@@ -15,11 +15,16 @@ import {
   FooterContainer,
   MapButton,
   SearchButton,
+  AdminButton,
 } from './styles';
+import { useRouter } from "expo-router";
 
-function Main() {
+
+export default function Main() {
   const [isMapModalVisible, setMapModalVisible] = useState(false);
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
+  const router = useRouter();
+
 
   return (
     <>
@@ -48,6 +53,12 @@ function Main() {
           >
             <Ionicons name="md-search" size={40} color="black" />
           </SearchButton>
+
+          {/* testar***** */}
+          <AdminButton
+            onPress={() => router.push("/admin")}>
+            <MaterialIcons name="admin-panel-settings" size={40} color="black" />
+          </AdminButton>
         </FooterContainer>
       </Footer>
 

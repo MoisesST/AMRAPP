@@ -1,13 +1,13 @@
-import firebaseConfig from "../src/config/firebaseConfig";
-import useFirebase from "../src/hooks/useFirebase";
-//import Router from "../src/screens/Router"; //verificar uso
+//import { useRouter } from "expo-router";
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import { Main } from '../src/Main';
+import { Main } from './main';
+import { Alert, Text, TextInput, View } from "react-native";
+//import useAuth from "../src/hooks/useAuth";
+
 
 function App() {
-  //const firebaseApp = useFirebase(firebaseConfig);
-  //if (firebaseApp == null) return <div>Loading...</div>;
+  //const router = useRouter();
 
   const [isFontsLoaded] = useFonts({
     'GeneralSans-400': require('../assets/fonts/GeneralSans-Regular.otf'),
@@ -19,12 +19,10 @@ function App() {
     return null;
   }
 
-  //return <Router />; //verificar uso
-
   return (
     <>
-      <StatusBar style='light' backgroundColor='#000' />
-      <Main />
+        <StatusBar style='light' backgroundColor='#000' />
+        <Main />
     </>
   );
 }

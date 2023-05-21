@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { FlatList } from 'react-native';
 
-import { lines } from '../../mocks/lines';
+import { lines } from '../../mocks/line';
 import { Text } from '../../global/Text';
 import { Line } from './styles';
 
