@@ -1,5 +1,4 @@
-import firebaseConfig from "../src/config/firebaseConfig";
-import useFirebase from "../src/hooks/useFirebase";
+
 import { useFonts } from 'expo-font';
 
 import { useColorScheme } from 'react-native';

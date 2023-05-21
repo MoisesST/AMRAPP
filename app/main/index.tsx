@@ -1,17 +1,13 @@
 import { useState } from 'react';
 import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Header } from '../../src/components/Header';
-
-//import { Lines } from '../../src/components/Lines';
 import { ViewLine } from '../../src/components/ViewLine';
-
-
 import useCollection from "../../src/hooks/useCollection";
 import Line from "../../src/types/Line";
 import { FlatList } from 'react-native';
 import { Text } from '../../src/global/Text';
-
-
+import { useThemeContext } from '../../src/contexts/ThemeContext';
+import { ThemeProvider } from 'styled-components/native';
 import { Points } from '../../src/components/Points';
 import { MapModal } from '../../src/components/MapModal';
 import { SearchModal } from '../../src/components/SearchModal';
@@ -44,8 +40,10 @@ export default function Main() {
   }
 
 
+  const {theme} = useThemeContext();
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Container>
         <Header />
 
@@ -110,17 +108,18 @@ export default function Main() {
           <MapButton
             onPress={() => setMapModalVisible(true)}
           >
-            <FontAwesome5 name="map" size={40} color="black" />
+            <FontAwesome5 name="map" size={40} color={theme.color} />
           </MapButton>
 
           <SearchButton
             onPress={() => setSearchModalVisible(true)}
           >
-            <Ionicons name="md-search" size={40} color="black" />
+            <Ionicons name="md-search" size={40} color={theme.color} />
           </SearchButton>
 
+          {/* testar***** */}
           <AdminButton
-            onPress={() => router.push("/login")}>
+            onPress={() => router.push("/admin")}>
             <MaterialIcons name="admin-panel-settings" size={40} color="black" />
           </AdminButton>
         </FooterContainer>
@@ -135,7 +134,7 @@ export default function Main() {
         visible={isSearchModalVisible}
         onClose={() => setSearchModalVisible(false)}
       />
-    </>
+    </ThemeProvider>
   );
 }
 export { Main };
