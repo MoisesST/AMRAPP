@@ -17,6 +17,9 @@ export const Container = styled.SafeAreaView`
 
 export const FormContainer = styled.View`
   flex: 1;
+  justifyContent: center;
+  alignItems: center;
+  paddingHorizontal: 18;
 `;
 
 export const Footer = styled.View`
@@ -38,3 +41,5 @@ export const FooterContainer = styled.SafeAreaView`
 export const AdminButton = styled.TouchableOpacity``;
 
 export const HomeButton = styled.TouchableOpacity``;
+
+export const SubmitButton = styled.TouchableOpacity``;
