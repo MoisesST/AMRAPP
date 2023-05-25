@@ -13,7 +13,8 @@ export const CloseButton = styled.TouchableOpacity`
 export const ModalBody = styled.View`
   flex: 1;
   padding: 32px 24px 0;
-  background: #fafafa;
+  /* background: #fafafa; */
+  background: ${props => props.theme.secondary};
 `;
 
 export const Header = styled.View``;
@@ -25,7 +26,8 @@ export const SchedulesContainer = styled.View`
 
 export const Footer = styled.View`
   min-height: 110px;
-  background: #fff;
+  /* background: #fff; */
+  background: ${props => props.theme.primary};
   padding: 16px 24px;
 `;
 

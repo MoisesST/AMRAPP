@@ -6,6 +6,7 @@ import { points } from '../../mocks/points';
 import { Point } from '../../types/Point';
 import { Text } from '../../global/Text';
 import { Container, Separator } from './styles';
+import { useThemeContext } from '../../contexts/ThemeContext';
 
 //import useCollection from "../../hooks/useCollection";
 //import Line from "../../types/Line";
@@ -22,6 +23,8 @@ function Points() {
   const now = new Date();
   const options = { timeZone: 'America/Sao_Paulo' };
   const currentTime = now.toLocaleTimeString('pt-BR', options);
+
+  const {theme} = useThemeContext();
 
   return (
     <>
@@ -40,12 +43,13 @@ function Points() {
         ItemSeparatorComponent={Separator}
         renderItem={({ item: point }) => (
           <Container onPress={() => handleOpenModal(point)}>
-            <MaterialIcons name="location-pin" size={18} color="black" />
+            <MaterialIcons name="location-pin" size={18} color={theme.color} />
 
             <Text
               size={14}
               weight='400'
               style={{ marginLeft: 24}}
+              color={theme.color}
             >
               {point.name}
             </Text>
@@ -53,7 +57,13 @@ function Points() {
             <Text
               size={14}
               weight='700'
-              style={{ flex: 1, position: 'absolute', bottom: 0, right: 0 }}
+              style={{
+                flex: 1,
+                position: 'absolute',
+                bottom: 10, right: 0,
+                alignItems: 'center'
+              }}
+              color={theme.color}
             >
               {point.schedules.find(time => time >= currentTime)}
             </Text>

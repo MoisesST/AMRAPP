@@ -1,0 +1,15 @@
+export default {
+  primary: '#0F172B',
+  secondary: '#1F2A3D',
+  tertiary: '#324359',
+  color: '#94A3B8',
+  title: '#E2E8F0',
+  statusbar: '#1F2A3D',
+  icons: '#fff',
+  // bg_slate_400: '#617892',
+  // bg_slate_500: '#46596E',
+  // bg_slate_600: '#455A70',
+  // bg_slate_700: '#324359',
+  // bg_slate_800: '#1F2A3D',
+  // bg_slate_900: '#0F172B',
+};

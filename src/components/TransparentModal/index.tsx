@@ -6,6 +6,8 @@ import { ReactNode } from 'react';
 
 import { Text } from '../../global/Text';
 import { Overlay, ModalBody, CloseButton, Header, Form } from './styles';
+import { useThemeContext } from '../../contexts/ThemeContext';
+
 
 interface TransparentModalProps {
   visible: boolean;
@@ -19,6 +21,8 @@ function TransparentModal
   { visible, onClose, title, children }: TransparentModalProps
 )
 {
+  const {theme} = useThemeContext();
+
   return (
     <Modal
       visible={visible}
@@ -31,9 +35,9 @@ function TransparentModal
       >
         <ModalBody>
           <Header>
-            <Text weight='600'>{title}</Text>
+            <Text weight='600' color={theme.color}>{title}</Text>
             <CloseButton onPress={onClose}>
-              <Ionicons name="close" size={20} color="#666" />
+              <Ionicons name="close" size={20} color={theme.color} />
             </CloseButton>
           </Header>
 

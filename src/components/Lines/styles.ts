@@ -7,7 +7,7 @@ const isAndroid = Platform.OS === 'android';
 export const LineStyled = styled.TouchableOpacity`
   width: 350px;
   margin-left: 24px;
-  background: #000;
+  background: ${props => props.theme.statusbar};
   justify-content: center;
   align-items: center;
   border-radius: 10px;

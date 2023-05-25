@@ -1,7 +1,12 @@
 import { useFonts } from 'expo-font';
+
+import { useColorScheme } from 'react-native';
+
 import { StatusBar } from 'expo-status-bar';
-import { Main } from './main';
-import { Alert, Text, TextInput, View } from "react-native";
+
+import { Main } from '../src/Main';
+import themes from '../src/themes';
+import ThemeContextProvider from '../src/contexts/ThemeContext';
 
 function App() {
   const [isFontsLoaded] = useFonts({
@@ -10,15 +15,18 @@ function App() {
     'GeneralSans-700': require('../assets/fonts/GeneralSans-Bold.otf'),
   });
 
+  const deviceTheme = useColorScheme();
+  const theme = themes[deviceTheme!] || theme.dark;
+
   if (!isFontsLoaded) {
     return null;
   }
 
   return (
-    <>
-        <StatusBar style='light' backgroundColor='#000' />
-        <Main />
-    </>
+    <ThemeContextProvider>
+      <StatusBar style='light' backgroundColor={theme.statusbar} />
+      <Main />
+    </ThemeContextProvider>
   );
 }
 
