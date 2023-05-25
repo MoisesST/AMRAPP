@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import axios from 'axios';
-
 import {
   requestBackgroundPermissionsAsync,
   getCurrentPositionAsync,
   LocationObject,
 } from 'expo-location';
 
+import weatherapi from '../../services/weatherapi';
 import { Container, Image, TextContainer, TitleContainer, WeatherContainer } from './styles';
 import { Text } from '../../global/Text';
 import { useThemeContext } from '../../contexts/ThemeContext';
@@ -28,7 +27,7 @@ function Header() {
   }
 
   const getWeather = async (lat: any, long: any) => {
-    const res = await axios.get('http://api.weatherapi.com/v1/current.json', {
+    weatherapi.get('current.json', {
       params: {
         key: 'c7aa02ad4a6f447caaf212821232405',
         q: 'guarapuava',
@@ -36,14 +35,10 @@ function Header() {
         lat: lat,
         lon: long
       }
+    }).then((response) => {
+      setWeather(response.data);
     });
-    setWeather(res.data);
   };
-
-  const formattedObj = JSON.stringify(weather, null);
-
-  // console.log(formattedObj);
-  console.log(weather);
 
   useEffect(() => {
     requestLocationPermissions();
