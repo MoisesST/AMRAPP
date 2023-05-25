@@ -11,7 +11,9 @@ export const Overlay = styled.KeyboardAvoidingView`
 export const ModalBody = styled.View`
   padding: 24px;
   border-radius: 8px;
-  background: #fafafa;
+  /* background: #fafafa; */
+  background: ${props => props.theme.primary};
+
 `;
 
 export const CloseButton = styled.TouchableOpacity``;

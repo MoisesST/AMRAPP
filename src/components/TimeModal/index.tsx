@@ -6,6 +6,7 @@ import * as Notifications from 'expo-notifications';
 
 import { TransparentModal } from '../TransparentModal';
 import { Input } from '../Input';
+import { useThemeContext } from '../../contexts/ThemeContext';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -54,7 +55,7 @@ function TimeModal({ visible, onClose, time }: TimeModalProps) {
     onClose();
   }
 
-  console.log(Number(minute));
+  const {theme} = useThemeContext();
 
   return (
     <TransparentModal
@@ -71,7 +72,8 @@ function TimeModal({ visible, onClose, time }: TimeModalProps) {
       <Switch
         disabled={minute.length === 0}
         trackColor={{ false: '#ffb6b6', true: '#a2ffa2' }}
-        thumbColor={'#f4f3f4'}
+        // thumbColor={'#f4f3f4'}
+        thumbColor={theme.secondary}
         onValueChange={toggleSwitch}
         value={isEnabled}
         style={{ marginLeft: 24 }}
