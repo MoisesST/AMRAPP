@@ -21,11 +21,30 @@
 //   };
 // }
 
-//padrã ofirebase
- type Line = {
-   id?: string; // reserved for firestore id
-   name: string;
-   lineNumber: string;
-   schedules: string[];
- };
- export default Line;
+//padrão firebase
+type Hours = {
+  hour: string;// subcoleção de hours
+}
+
+type Point = {
+  name: string;
+  hours?: Hours[];
+};
+
+type Line = {
+  id?: string; // reservado para o ID do Firestore
+  name: string;
+  lineNumber: string;
+  points?: Point[]; // subcoleção de points
+};
+
+export default Line;
+
+ // funcionado
+//  type Line = {
+//   id?: string; // reserved for firestore id
+//   name: string;
+//   lineNumber: string;
+// //   schedules: string[];
+// };
+// export default Line;

@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 
 const isAndroid = Platform.OS === 'android';
 
-export const Line = styled.TouchableOpacity`
+export const LineStyled = styled.TouchableOpacity`
   width: 350px;
   margin-left: 24px;
   background: #000;

@@ -10,17 +10,16 @@ export const Container = styled.SafeAreaView`
   background: #fafafa;
 `;
 
-export const LinesContainer = styled.View`
-  height: 30%;
-  margin-top: 34px;
-`;
+// export const LinesContainer = styled.View`
+//   height: 40px;
+//   margin-top: 34px;
+// `;
 
 export const FormContainer = styled.View`
   flex: 1;
   justifyContent: center;
   alignItems: center;
   paddingHorizontal: 18;
-  height: 50%;
 `;
 
 export const Footer = styled.View`

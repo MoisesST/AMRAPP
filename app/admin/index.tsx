@@ -1,41 +1,29 @@
 import { useState } from 'react';
-
 import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
-
 import { Header } from '../../src/components/Header';
-//import { Input } from '../../src/components/Input';
-// import { Lines } from '../../src/components/Lines';
-// import { Points } from '../../src/components/Points';
-// import { MapModal } from '../../src/components/MapModal';
-// import { SearchModal } from '../../src/components/SearchModal';
-
 import useCollection from "../../src/hooks/useCollection";
 import Line from "../../src/types/Line";
 import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   Container,
+  LinesContainer,
   FormContainer,
   Footer,
   FooterContainer,
   AdminButton,
-  SubmitButton,
   HomeButton,
 } from './styles';
 import { useRouter } from "expo-router";
 import { TextInput } from '../../src/components/Input/styles';
+import StyledButton from '../../src/components/StyledButton';
+import { ViewLineAdmin } from '../../src/components/ViewLineAdmin';
 
 
 export default function Admin() {
   const { data, create, remove, refreshData } = useCollection<Line>("lines");
-
-  // const [isMapModalVisible, setMapModalVisible] = useState(false);
-  // const [isSearchModalVisible, setSearchModalVisible] = useState(false);
   const router = useRouter();
-
   const [lineName, setLineName] = useState('')
   const [lineNumber, setLineNumber] = useState('')
-  //name: string;
-  //lineNumber: string;
 
   return (
     <>
@@ -43,6 +31,8 @@ export default function Admin() {
         <Header />
 
         <FormContainer>
+          <Text>Cadastro de novas linhas</Text>
+
           <ScrollView style={styles.scroll}>
             <TextInput
               style={styles.input}
@@ -59,25 +49,43 @@ export default function Admin() {
             />
           </ScrollView>
 
-          <SubmitButton
+          <StyledButton
+            title="Cadastrar"
             onPress={async () => {
               try {
                 await create({
                   name: lineName,
                   lineNumber: lineNumber,
-                  schedules: [],
                 });
+                Alert.alert("Criado com sucesso");
+
                 await refreshData();
+                router.push("/admin");
               } catch (error: any) {
                 Alert.alert("Create Line error", error.toString());
               }
-            }}>
-            <FontAwesome5 name="submit" size={40} color="black" />
-          </SubmitButton>
-
-
-
+            }}
+          />
         </FormContainer>
+
+        <LinesContainer>
+          <FlatList
+            showsVerticalScrollIndicator
+            //horizontal showsHorizontalScrollIndicator={false}
+            data={data}
+            contentContainerStyle={{ paddingRight: 24 }}
+            renderItem={({ item }) => (
+              // const isSelected = selectedLine === line.id!;
+              <ViewLineAdmin
+                line={item}
+                onDelete={async () => {
+                  await remove(item.id!);
+                  await refreshData();
+                }}
+              />
+            )}
+          />
+        </LinesContainer>
 
       </Container>
 

@@ -36,3 +36,13 @@ export const MapButton = styled.TouchableOpacity``;
 export const SearchButton = styled.TouchableOpacity``;
 
 export const AdminButton = styled.TouchableOpacity``;
+
+export const LineStyled = styled.TouchableOpacity`
+  width: 350px;
+  margin-left: 24px;
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, ${isAndroid ? 1 : 0.1});
+`;
