@@ -117,9 +117,8 @@ export default function Main() {
             <Ionicons name="md-search" size={40} color={theme.color} />
           </SearchButton>
 
-          {/* testar***** */}
           <AdminButton
-            onPress={() => router.push("/admin")}>
+            onPress={() => router.push("/login")}>
             <MaterialIcons name="admin-panel-settings" size={40} color="black" />
           </AdminButton>
         </FooterContainer>
