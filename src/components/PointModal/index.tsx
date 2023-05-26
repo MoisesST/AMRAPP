@@ -8,6 +8,7 @@ import { Point } from '../../types/Point';
 import { TimeModal } from '../TimeModal';
 import { Text } from '../../global/Text';
 import { TimeButton } from '../TimeButton';
+import { useThemeContext } from '../../contexts/ThemeContext';
 import {
   Image,
   CloseButton,
@@ -36,6 +37,8 @@ function PointModal({ visible, onClose, point }: PointModalProps) {
   const now = new Date();
   const options = { timeZone: 'America/Sao_Paulo' };
   const currentTime = now.toLocaleTimeString('pt-BR', options);
+
+  const {theme} = useThemeContext();
 
   function handleOpenModal(time: string) {
     if (time > currentTime) {
@@ -77,15 +80,17 @@ function PointModal({ visible, onClose, point }: PointModalProps) {
 
         <ModalBody>
           <Header>
-            <Text size={24} weight='600' >{point.name}</Text>
-            <Text color='#666' style={{ marginTop: 8 }}>
+            <Text size={24} weight='600' color={theme.title}>
+              {point.name}
+            </Text>
+            <Text color={theme.title} style={{ marginTop: 8 }}>
               Lista de todos os seus horários
             </Text>
           </Header>
 
           {point.schedules.length > 0 && (
             <SchedulesContainer>
-              <Text weight='600' color='#666'>Horários</Text>
+              <Text weight='600' color={theme.title}>Horários</Text>
 
               <FlatList
                 data={point.schedules}

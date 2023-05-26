@@ -18,3 +18,5 @@ web-build/
 
 #config firebase
 src/config/firebaseConfig.ts
+
+.env
