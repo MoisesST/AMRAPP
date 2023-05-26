@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { Header } from '../../src/components/Header';
 import { ViewLine } from '../../src/components/ViewLine';
 import useCollection from "../../src/hooks/useCollection";
