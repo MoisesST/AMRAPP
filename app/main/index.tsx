@@ -29,18 +29,13 @@ export default function Main() {
   const [isMapModalVisible, setMapModalVisible] = useState(false);
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
   const router = useRouter();
-
+  const {theme} = useThemeContext();
   const { data, create, remove, refreshData  } = useCollection<Line>("lines");
-  
   const [selectedLine, setSelectedLine] = useState('');
-
   function handleSelectLine(lineId: string) {
     const line = selectedLine === lineId ? '' : lineId;
     setSelectedLine(line);
   }
-
-
-  const {theme} = useThemeContext();
 
   return (
     <ThemeProvider theme={theme}>

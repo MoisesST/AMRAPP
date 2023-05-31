@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Header } from '../../src/components/Header';
-
 import { useRouter } from "expo-router";
 import useAuth from "../../src/hooks/useAuth";
 import StyledButton from '../../src/components/StyledButton';
-
-import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   Container,
   FormContainer,
@@ -17,16 +14,27 @@ import {
 } from './styles';
 import { TextInput } from '../../src/components/Input/styles';
 
+import themes from '../../src/themes';
+import { useThemeContext } from '../../src/contexts/ThemeContext';
+import { ThemeProvider } from 'styled-components/native';
+import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View, useColorScheme} from "react-native";
 
-export default function Admin() {
+
+
+export default function Login() {
   const { login } = useAuth();
   const router = useRouter();
-
   const [email, setEmail] = useState("user@example.com");
   const [password, setPassword] = useState("123456");
 
+  const deviceTheme = useColorScheme();
+  const {theme} = useThemeContext();
+
+  //const theme = themes[deviceTheme!] || theme.dark;
+
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Container>
         <Header />
 
@@ -56,7 +64,7 @@ export default function Admin() {
                 Alert.alert("Login error", error.toString());
               }
             }}
-            />
+          />
 
         </FormContainer>
 
@@ -70,7 +78,7 @@ export default function Admin() {
           </HomeButton>
         </FooterContainer>
       </Footer>
-    </>
+    </ThemeProvider>
   );
 }
 
@@ -86,3 +94,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+
+export { Login };
