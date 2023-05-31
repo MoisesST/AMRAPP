@@ -5,7 +5,7 @@ import { useColorScheme } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
 
-import { Main } from '../src/Main';
+import { Main } from './main';
 import themes from '../src/themes';
 import ThemeContextProvider from '../src/contexts/ThemeContext';
 
