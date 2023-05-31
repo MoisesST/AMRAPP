@@ -4,7 +4,8 @@ import { useFonts } from 'expo-font';
 import { useColorScheme } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
-import { Main } from './main';
+
+import { Main } from '../src/Main';
 import themes from '../src/themes';
 import ThemeContextProvider from '../src/contexts/ThemeContext';
 
@@ -24,10 +25,10 @@ function App() {
   }
 
   return (
-    <>
+    <ThemeContextProvider>
       <StatusBar style='light' backgroundColor={theme.statusbar} />
       <Main />
-    </>
+    </ThemeContextProvider>
   );
 }
 

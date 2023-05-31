@@ -8,9 +8,6 @@ import { Text } from '../../global/Text';
 import { Container, Separator } from './styles';
 import { useThemeContext } from '../../contexts/ThemeContext';
 
-//import useCollection from "../../hooks/useCollection";
-//import Line from "../../types/Line";
-
 function Points() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedPoint, setSelectedPoint] = useState<null | Point>(null);

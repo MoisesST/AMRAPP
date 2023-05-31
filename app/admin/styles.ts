@@ -7,7 +7,8 @@ const isAndroid = Platform.OS === 'android';
 export const Container = styled.SafeAreaView`
   margin-top: ${isAndroid ? `${StatusBar.currentHeight}px` : '0'};
   flex: 1;
-  background: #fafafa;
+  /* background: #fafafa; */
+  background: ${props => props.theme.primary};
 `;
 
 export const LinesContainer = styled.View`
@@ -25,7 +26,8 @@ export const FormContainer = styled.View`
 
 export const Footer = styled.View`
   height: 70px;
-  background: #fff;
+  /* background: #fff; */
+  background: ${props => props.theme.secondary};
 `;
 
 export const FooterContainer = styled.SafeAreaView`
