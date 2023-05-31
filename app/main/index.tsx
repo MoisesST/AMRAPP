@@ -20,7 +20,6 @@ import {
   MapButton,
   SearchButton,
   AdminButton,
-  LineStyled,
 } from './styles';
 import { useRouter } from "expo-router";
 
@@ -60,38 +59,6 @@ export default function Main() {
         )}
       />
         </LinesContainer>
-
-        {/**jeitos antigso*/}
-        {/* <LinesContainer>
-          <Lines />
-        </LinesContainer> */}
-
-        {/* <LinesContainer>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={{ paddingRight: 24 }}
-            keyExtractor={line => line.id!}
-            renderItem={({ item: line }) => {
-              const isSelected = selectedLine === line.id!;
-
-              return (
-                <LineStyled onPress={() => handleSelectLine(line.id!)}>
-                  <Text
-                    color='orange'
-                    size={14}
-                    weight='600'
-                    opacity={isSelected ? 1 : 0.5}
-                  >
-                    {line.lineNumber} {line.name}
-                  </Text>
-                </LineStyled>
-              );
-            }}
-          />
-
-        </LinesContainer> */}
 
         <PointsContainer>
           <Points />

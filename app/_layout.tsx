@@ -7,7 +7,6 @@ import {
 import firebaseConfig from "../src/config/firebaseConfig";
 import useFirebase from "../src/hooks/useFirebase";
 import { ThemeProvider } from 'styled-components/native';
-import themes from "../src/themes";
 import ThemeContextProvider, { useThemeContext } from "../src/contexts/ThemeContext";
 import { PropsWithChildren } from "react";
 
