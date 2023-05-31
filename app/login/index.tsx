@@ -9,15 +9,10 @@ import {
   FormContainer,
   Footer,
   FooterContainer,
-  AdminButton,
   HomeButton,
 } from './styles';
 import { TextInput } from '../../src/components/Input/styles';
-
-import themes from '../../src/themes';
-import { useThemeContext } from '../../src/contexts/ThemeContext';
-import { ThemeProvider } from 'styled-components/native';
-import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View, useColorScheme} from "react-native";
+import { Alert, ScrollView, StyleSheet } from "react-native";
 
 
 
@@ -27,14 +22,8 @@ export default function Login() {
   const [email, setEmail] = useState("user@example.com");
   const [password, setPassword] = useState("123456");
 
-  const deviceTheme = useColorScheme();
-  const {theme} = useThemeContext();
-
-  //const theme = themes[deviceTheme!] || theme.dark;
-
-
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Container>
         <Header />
 
@@ -78,7 +67,7 @@ export default function Login() {
           </HomeButton>
         </FooterContainer>
       </Footer>
-    </ThemeProvider>
+    </>
   );
 }
 

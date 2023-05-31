@@ -16,6 +16,7 @@ function App() {
   });
 
   const deviceTheme = useColorScheme();
+  // @ts-ignore
   const theme = themes[deviceTheme!] || theme.dark;
 
   if (!isFontsLoaded) {
@@ -23,10 +24,10 @@ function App() {
   }
 
   return (
-    <ThemeContextProvider>
+    <>
       <StatusBar style='light' backgroundColor={theme.statusbar} />
       <Main />
-    </ThemeContextProvider>
+    </>
   );
 }
 

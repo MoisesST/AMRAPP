@@ -19,7 +19,7 @@ export const FormContainer = styled.View`
   flex: 1;
   justifyContent: center;
   alignItems: center;
-  paddingHorizontal: 18;
+  paddingHorizontal: 18px;
   height: 50%;
 `;
 
