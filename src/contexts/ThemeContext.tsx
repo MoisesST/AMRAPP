@@ -27,8 +27,10 @@ export const ThemeContext =
 // Create a custom context provider, so all context data will be self-contained
 export default function ThemeContextProvider({ children }: PropsWithChildren) {
   const deviceTheme = useColorScheme();
+  // @ts-ignore
   const theme = themes[deviceTheme!] || theme.dark;
-
+  
+  // @ts-ignore
   const value: ThemeContextProps = {
     theme,
   };

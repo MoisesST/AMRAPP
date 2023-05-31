@@ -12,12 +12,16 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const LinesContainer = styled.View`
-  height: 40px;
+  height: 30%;
   margin-top: 34px;
 `;
 
-export const PointsContainer = styled.View`
+export const FormContainer = styled.View`
   flex: 1;
+  justifyContent: center;
+  alignItems: center;
+  paddingHorizontal: 18px;
+  height: 50%;
 `;
 
 export const Footer = styled.View`
@@ -33,6 +37,12 @@ export const FooterContainer = styled.SafeAreaView`
   align-items: center;
 `;
 
-export const MapButton = styled.TouchableOpacity``;
+// export const MapButton = styled.TouchableOpacity``;
 
-export const SearchButton = styled.TouchableOpacity``;
+// export const SearchButton = styled.TouchableOpacity``;
+
+export const AdminButton = styled.TouchableOpacity``;
+
+export const HomeButton = styled.TouchableOpacity``;
+
+export const SubmitButton = styled.TouchableOpacity``;

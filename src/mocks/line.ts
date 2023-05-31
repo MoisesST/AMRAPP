@@ -1,6 +1,6 @@
-import { Lines } from '../types/Lines';
+import { Line } from '../types/Line';
 
-export const lines: Lines[] = [
+export const lines: Line[] = [
   {
     _id: '50',
     name: 'SHOPPING',
