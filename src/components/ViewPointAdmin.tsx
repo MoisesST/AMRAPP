@@ -2,21 +2,21 @@ import { View, Alert, StyleSheet } from "react-native";
 import { Text } from '../global/Text';
 import StyledButton from "./StyledButton";
 import useCollection from "../hooks/useCollection";
-import Line from "../types/Line";
+import Point from "../types/Point";
 import { useRouter } from "expo-router";
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
-interface ViewLineAdminProps {
-  line: Line;
+interface ViewPointAdminProps {
+  point: Point;
   onDelete: Function;
 }
 
-function ViewLineAdmin({ line, onDelete }: ViewLineAdminProps) {
+function ViewPointAdmin({ point, onDelete }: ViewPointAdminProps) {
   const router = useRouter();
 
   return (
-    <View style={styles.lines}>
+    <View style={styles.points}>
       <LineStyled >
         <Text
           color='orange'
@@ -24,7 +24,7 @@ function ViewLineAdmin({ line, onDelete }: ViewLineAdminProps) {
           weight='600'
         //opacity={isSelected ? 1 : 0.5}
         >
-          {line.lineNumber} {line.name}
+         {point.name}
         </Text>
       </LineStyled>
 
@@ -32,13 +32,13 @@ function ViewLineAdmin({ line, onDelete }: ViewLineAdminProps) {
         <StyledButton
           title="Detalhes"
           onPress={() => {
-            if (line.id) {
-              console.log(">>>>>>>>>", line)
-              router.push("/admin/" + line.id);
+            if (point.id) {
+              console.log(">>>>>>>>>", point)
+              router.push("/points/" + point.id);
             } else {
               Alert.alert(
                 "View error",
-                "cannot access Lines details because it does not have an id!"
+                "cannot access Point details because it does not have an id!"
               );
             }
           }}
@@ -48,8 +48,8 @@ function ViewLineAdmin({ line, onDelete }: ViewLineAdminProps) {
         <StyledButton
           title="Deletar"
           onPress={() => {
-            if (line.id) {
-              Alert.alert("Deletar linha", "tem certeza?", [
+            if (point.id) {
+              Alert.alert("Deletar parada", "tem certeza?", [
                 {
                   text: "Sim",
                   onPress: async () => {
@@ -64,7 +64,7 @@ function ViewLineAdmin({ line, onDelete }: ViewLineAdminProps) {
             } else {
               Alert.alert(
                 "delete error",
-                "cannot delete book because it does not have an id!"
+                "cannot delete stop because it does not have an id!"
               );
             }
           }}
@@ -93,11 +93,11 @@ const LineStyled = styled.TouchableOpacity`
 `;
 
 const styles = StyleSheet.create({
-  lines: {
+  points: {
     paddingBottom: 10,
     margin: 5,
     alignItems: 'center',
   },
 });
 
-export { ViewLineAdmin };
+export { ViewPointAdmin };

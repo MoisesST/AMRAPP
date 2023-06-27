@@ -4,14 +4,25 @@ import { Text } from '../../global/Text';
 import { LineStyled } from './styles';
 import useCollection from "../../hooks/useCollection";
 import Line from "../../types/Line";
+import { useRouter } from "expo-router";
 
-function Lines() {
-  const { data } = useCollection<Line>("lines");
+interface LinesProps {
+  onLineSelect: (lineId: string) => void;
+  line?: Line;
+  onDelete?: Function;
+}
+
+function Lines({onLineSelect, line, onDelete} : LinesProps) {
+  const router = useRouter();
+  const { data, create, remove, refreshData  } = useCollection<Line>("lines");
+  
   const [selectedLine, setSelectedLine] = useState('');
 
-  function handleSelectLine(lineId: string) {
+  const handleSelectLine = (lineId: string) => {
     const line = selectedLine === lineId ? '' : lineId;
     setSelectedLine(line);
+    onLineSelect(lineId);
+    //console.log("################Linha id..........." + line);
   }
 
   return (
@@ -32,7 +43,7 @@ function Lines() {
               weight='600'
               opacity={isSelected ? 1 : 0.5}
             >
-              {line.lineNumber} {line.name}
+              {line.lineNumber}  -  {line.name}
             </Text>
           </LineStyled>
         );
@@ -41,49 +52,3 @@ function Lines() {
   );
 }
 export { Lines };
-
-
-
-// import { useState } from 'react';
-
-// import { FlatList } from 'react-native';
-
-// import { lines } from '../../mocks/line';
-// import { Text } from '../../global/Text';
-// import { Line } from './styles';
-
-// function Lines() {
-//   const [selectedLine, setSelectedLine] = useState('');
-
-//   function handleSelectLine(lineId: string) {
-//     const line = selectedLine === lineId ? '' : lineId;
-//     setSelectedLine(line);
-//   }
-
-//   return (
-//     <FlatList
-//       horizontal
-//       showsHorizontalScrollIndicator={false}
-//       data={lines}
-//       contentContainerStyle={{ paddingRight: 24}}
-//       keyExtractor={line => line._id}
-//       renderItem={({ item: line }) => {
-//         const isSelected = selectedLine === line._id;
-
-//         return (
-//           <Line onPress={() => handleSelectLine(line._id)}>
-//             <Text
-//               color='orange'
-//               size={14}
-//               weight='600'
-//               opacity={isSelected ? 1 : 0.5}
-//             >
-//               {line.lineNumber} {line.name}
-//             </Text>
-//           </Line>
-//         );
-//       }}
-//     />
-//   );
-// }
-// export { Lines };

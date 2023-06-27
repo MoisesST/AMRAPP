@@ -31,7 +31,7 @@ function ViewLine({ line, onDelete }: ViewLineProps) {
               weight='600'
               //opacity={isSelected ? 1 : 0.5}
             >
-              {line.lineNumber} {line.name}
+              {line.lineNumber}{line.name}
             </Text>
           </LineStyled>
 

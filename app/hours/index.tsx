@@ -12,18 +12,30 @@ import {
   FooterContainer,
   AdminButton,
   HomeButton,
+  LinesContainerList,
 } from './styles';
 import { useRouter } from "expo-router";
 import { TextInput } from '../../src/components/Input/styles';
 import StyledButton from '../../src/components/StyledButton';
-import { ViewLineAdmin } from '../../src/components/ViewLineAdmin';
+import { ViewPointAdmin } from '../../src/components/ViewPointAdmin';
+import { Lines } from '../../src/components/Lines';
+import Point from "../../src/types/Point";
+import Hour from "../../src/types/Hours";
 
 
 export default function Admin() {
-  const { data, create, remove, refreshData } = useCollection<Line>("lines");
   const router = useRouter();
-  const [lineName, setLineName] = useState('')
-  const [lineNumber, setLineNumber] = useState('')
+  const { data, create, remove, refreshData } = useCollection<Point>("points");
+  const [paradaName, setParadaName] = useState('')
+  const [selectedLine, setSelectedLine] = useState('');
+  const [dataShow, setDataShow] = useState(data);
+
+  const handleLineSelect = (lineId: string) => {
+    setSelectedLine(lineId);
+    console.log('Linha selecionada:', lineId);
+    const filteredArray = data.filter((item) => item.lineId === lineId);
+    setDataShow(filteredArray);
+  };
 
   return (
     <>
@@ -31,38 +43,48 @@ export default function Admin() {
         <Header />
 
         <FormContainer>
-          <Text>Cadastro de Linhas</Text>
+          <Text>Cadastro de Paradas</Text>
 
-          <ScrollView style={styles.scroll}>
-            <TextInput
-              style={styles.input}
-              onChangeText={setLineName}
-              value={lineName}
-              placeholder='nome linha'
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={setLineNumber}
-              value={lineNumber}
-              placeholder="numero linha"
-              keyboardType="numeric"
-            />
-          </ScrollView>
+          <Text>1º Selecione a parada</Text>
 
+          <LinesContainerList>
+            <Lines onLineSelect={handleLineSelect} />
+          </LinesContainerList>
+
+        <ScrollView style={styles.scroll}>
+          <TextInput
+            style={styles.input}
+            value={"ID:.." + selectedLine}
+            placeholder='ID da linha'
+            editable={false}
+          />
+
+          <Text>2º Cadastrar uma parada</Text>
+
+          <TextInput
+            style={styles.input}
+            onChangeText={setParadaName}
+            value={paradaName}
+            placeholder="Nome da parada"
+          />
+
+        </ScrollView>
+
+          <Text>3º Cadastrar uma nova parada</Text>
           <StyledButton
             title="Cadastrar"
             onPress={async () => {
               try {
                 await create({
-                  name: lineName,
-                  lineNumber: lineNumber,
+                  name: paradaName,
+                  lineId: selectedLine,
                 });
-                Alert.alert("Criado com sucesso");
-
+                Alert.alert("Ponto cadastrada com sucesso");
+                setParadaName('');
+                setSelectedLine('');
                 await refreshData();
-                router.push("/admin");
               } catch (error: any) {
-                Alert.alert("Create Line error", error.toString());
+                Alert.alert("Erro ao cadastrar o ponto", error.toString());
               }
             }}
           />
@@ -71,13 +93,12 @@ export default function Admin() {
         <LinesContainer>
           <FlatList
             showsVerticalScrollIndicator
-            //horizontal showsHorizontalScrollIndicator={false}
-            data={data}
+            data={dataShow}
             contentContainerStyle={{ paddingRight: 24 }}
             renderItem={({ item }) => (
               // const isSelected = selectedLine === line.id!;
-              <ViewLineAdmin
-                line={item}
+              <ViewPointAdmin
+                point={item}
                 onDelete={async () => {
                   await remove(item.id!);
                   await refreshData();

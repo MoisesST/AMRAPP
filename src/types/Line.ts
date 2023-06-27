@@ -22,13 +22,13 @@
 // }
 
 //padrão firebase
-type Hours = {
+type Hour = {
   hour: string;// subcoleção de hours
 }
 
 type Point = {
   name: string;
-  hours?: Hours[];
+  hours?: Hour[];
 };
 
 type Line = {

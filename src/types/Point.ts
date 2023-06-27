@@ -1,9 +1,17 @@
-export interface Point {
-  _id: string;
-  line_id: string;
+type Point = {
+  id?: string; // reservado para o ID do Firestore
   name: string;
-  schedules: string[];
-}
+  lineId: string;
+};
+
+export default Point;
+
+// export interface Point {
+//   _id: string;
+//   line_id: string;
+//   name: string;
+//   schedules: string[];
+// }
 
 // {
 //   _id: '1',
