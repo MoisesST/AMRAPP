@@ -4,7 +4,7 @@ import { FlatList, Modal } from 'react-native';
 
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { Point } from '../../types/Point';
+import Point from '../../types/Point';
 import { TimeModal } from '../TimeModal';
 import { Text } from '../../global/Text';
 import { TimeButton } from '../TimeButton';

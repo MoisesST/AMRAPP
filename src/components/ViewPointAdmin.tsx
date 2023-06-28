@@ -1,7 +1,6 @@
 import { View, Alert, StyleSheet } from "react-native";
 import { Text } from '../global/Text';
 import StyledButton from "./StyledButton";
-import useCollection from "../hooks/useCollection";
 import Point from "../types/Point";
 import { useRouter } from "expo-router";
 import styled from 'styled-components/native';
@@ -30,7 +29,7 @@ function ViewPointAdmin({ point, onDelete }: ViewPointAdminProps) {
 
       <View style={{ flexDirection: "row" }}>
         <StyledButton
-          title="Detalhes"
+          title="Editar/Horários"
           onPress={() => {
             if (point.id) {
               console.log(">>>>>>>>>", point)
@@ -72,10 +71,6 @@ function ViewPointAdmin({ point, onDelete }: ViewPointAdminProps) {
         />
       </View>
     </View>
-
-
-
-
   );
 }
 

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FontAwesome5, FontAwesome, AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Header } from '../../src/components/Header';
 import useCollection from "../../src/hooks/useCollection";
-import Line from "../../src/types/Line";
 import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   Container,
@@ -10,7 +9,6 @@ import {
   FormContainer,
   Footer,
   FooterContainer,
-  AdminButton,
   HomeButton,
   LinesContainerList,
 } from './styles';
@@ -50,24 +48,24 @@ export default function Admin() {
             <Lines onLineSelect={handleLineSelect} />
           </LinesContainerList>
 
-        <ScrollView style={styles.scroll}>
-          <TextInput
-            style={styles.input}
-            value={"ID:.." + selectedLine}
-            placeholder='ID da linha'
-            editable={false}
-          />
+          <ScrollView style={styles.scroll}>
+            <TextInput
+              style={styles.input}
+              value={"ID:.." + selectedLine}
+              placeholder='ID da linha'
+              editable={false}
+            />
 
-          <Text>2º Cadastrar uma parada</Text>
+            <Text>2º Cadastrar uma parada</Text>
 
-          <TextInput
-            style={styles.input}
-            onChangeText={setParadaName}
-            value={paradaName}
-            placeholder="Nome da parada"
-          />
+            <TextInput
+              style={styles.input}
+              onChangeText={setParadaName}
+              value={paradaName}
+              placeholder="Nome da parada"
+            />
 
-        </ScrollView>
+          </ScrollView>
 
           <Text>3º Cadastrar uma nova parada</Text>
           <StyledButton
@@ -75,8 +73,9 @@ export default function Admin() {
             onPress={async () => {
               try {
                 await create({
-                  name: paradaName,
                   lineId: selectedLine,
+                  name: paradaName,
+                  schedules: [],
                 });
                 Alert.alert("Ponto cadastrada com sucesso");
                 setParadaName('');
@@ -122,10 +121,6 @@ export default function Admin() {
           <HomeButton
             onPress={() => router.push("/points")}>
             <FontAwesome name="hand-stop-o" size={24} color="black" />
-          </HomeButton>
-          <HomeButton
-            onPress={() => router.push("/hours")}>
-            <AntDesign name="clockcircleo" size={24} color="black" />
           </HomeButton>
         </FooterContainer>
       </Footer>

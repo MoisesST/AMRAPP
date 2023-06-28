@@ -6,53 +6,38 @@ import { PointModal } from '../PointModal';
 import { Text } from '../../global/Text';
 import { Container, Separator } from './styles';
 import { useThemeContext } from '../../contexts/ThemeContext';
-
 import Point from "../../types/Point";
 import Line from "../../types/Line";
 import useCollection from "../../hooks/useCollection";
 import { useRouter } from "expo-router";
-
-
-
 interface PointsProps {
   //onLineSelect: (lineId: string) => void; //line id passado por parametro
   lineId?: string;
   point?: Point;
   onDelete?: Function;
 }
-
-function Points({lineId, point, onDelete} : PointsProps) {
+function Points({ lineId, point, onDelete }: PointsProps) {
   const router = useRouter();
-  const { data, create, remove, refreshData  } = useCollection<Point>("points");
-
+  const { data, create, remove, refreshData } = useCollection<Point>("points");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedPoint, setSelectedPoint] = useState<null | Point>(null);
-
   function handleOpenModal(point: Point) {
     setIsModalVisible(true);
     setSelectedPoint(point);
   }
-
   const [dataShow, setDataShow] = useState(data);
-
-    useEffect(() => {
-      filtroPoints(lineId as string)
-    }, [lineId]);  
-
-    const [selectedLine, setSelectedLine] = useState('');
-
-
-    const filtroPoints = (lineId: string) => {
-      const filteredArray = data.filter((item) => item.lineId === lineId);
-      setDataShow(filteredArray);
-    }
-
+  useEffect(() => {
+    filtroPoints(lineId as string)
+  }, [lineId]);
+  const [selectedLine, setSelectedLine] = useState('');
+  const filtroPoints = (lineId: string) => {
+    const filteredArray = data.filter((item) => item.lineId === lineId);
+    setDataShow(filteredArray);
+  }
   const now = new Date();
   const options = { timeZone: 'America/Sao_Paulo' };
   const currentTime = now.toLocaleTimeString('pt-BR', options);
-
-  const {theme} = useThemeContext();
-
+  const { theme } = useThemeContext();
   return (
     <>
       <PointModal
@@ -60,7 +45,6 @@ function Points({lineId, point, onDelete} : PointsProps) {
         onClose={() => setIsModalVisible(false)}
         point={selectedPoint}
       />
-
       <FlatList
         data={dataShow}
         style={{ marginTop: 32 }}
@@ -71,16 +55,14 @@ function Points({lineId, point, onDelete} : PointsProps) {
         renderItem={({ item: point }) => (
           <Container onPress={() => handleOpenModal(point)}>
             <MaterialIcons name="location-pin" size={18} color={theme.color} />
-
             <Text
               size={14}
               weight='400'
-              style={{ marginLeft: 24}}
+              style={{ marginLeft: 24 }}
               color={theme.color}
             >
               {point.name}
             </Text>
-
             <Text
               size={14}
               weight='700'
@@ -92,7 +74,7 @@ function Points({lineId, point, onDelete} : PointsProps) {
               }}
               color={theme.color}
             >
-              17:00 {/* {point.schedules.find(time => time >= currentTime)} */}
+              {point.schedules.find(time => time >= currentTime)}
             </Text>
           </Container>
         )}

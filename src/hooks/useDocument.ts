@@ -7,12 +7,6 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-export type Book = {
-  id?: string;
-  title: string;
-  pages: number;
-};
-
 /**
  * Hook to access and manage a firestore document.
  * @param collectionName Collection name in plural (e.g. 'books'). Can also be a path to subcollection.

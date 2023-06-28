@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5, FontAwesome, AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Header } from '../../../src/components/Header';
 import useCollection from "../../../src/hooks/useCollection";
 import useDocument from "../../../src/hooks/useDocument";
@@ -7,11 +7,9 @@ import Line from "../../../src/types/Line";
 import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   Container,
-  LinesContainer,
   FormContainer,
   Footer,
   FooterContainer,
-  AdminButton,
   HomeButton,
 } from '../styles';
 import { Stack, useRouter, useSearchParams } from "expo-router";
@@ -24,8 +22,6 @@ export default function LineDetails() {
   const { id } = useSearchParams();
   const router = useRouter();
 
-  //   const { data, create, remove, refreshData } = useCollection<Line>("lines");
-  //   const router = useRouter();
   const [lineNamee, setLineName] = useState('')
   const [lineNumbere, setLineNumber] = useState('')
 
@@ -45,18 +41,12 @@ export default function LineDetails() {
 
   if (loading || !line) return <Text>Garregando...</Text>;
 
-
   return (
     <>
       <Container>
         <Header />
-
         <FormContainer>
           <Text>Edição de linha</Text>
-
-
-
-
           <ScrollView style={styles.scroll}>
             <TextInput
               style={styles.input}
@@ -89,9 +79,6 @@ export default function LineDetails() {
               }
             }}
           />
-
-
-
         </FormContainer>
 
       </Container>
@@ -101,6 +88,14 @@ export default function LineDetails() {
           <HomeButton
             onPress={() => router.push("/")}>
             <FontAwesome5 name="home" size={40} color="black" />
+          </HomeButton>
+          <HomeButton
+            onPress={() => router.push("/admin")}>
+            <FontAwesome5 name="route" size={24} color="black" />
+          </HomeButton>
+          <HomeButton
+            onPress={() => router.push("/points")}>
+            <FontAwesome name="hand-stop-o" size={24} color="black" />
           </HomeButton>
         </FooterContainer>
       </Footer>

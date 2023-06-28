@@ -103,10 +103,6 @@ export default function Admin() {
             onPress={() => router.push("/points")}>
             <FontAwesome name="hand-stop-o" size={24} color="black" />
           </HomeButton>
-          <HomeButton
-            onPress={() => router.push("/hours")}>
-            <AntDesign name="clockcircleo" size={24} color="black" />
-          </HomeButton>
         </FooterContainer>
       </Footer>
     </>
