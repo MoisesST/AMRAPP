@@ -1,13 +1,9 @@
 import { useState } from 'react';
-import { FontAwesome5, FontAwesome, AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Header } from '../../src/components/Header';
-import useCollection from '../../src/hooks/useCollection';
-import Line from '../../src/types/Line';
-import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import useCollection from '../../src/hooks/useCollection';
 import Line from '../../src/types/Line';
 import { Alert, FlatList, StatusBar, StyleSheet, useColorScheme } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 import {
   Container,
   LinesContainer,
@@ -17,8 +13,6 @@ import {
   HomeButton,
 } from './styles';
 import { useRouter } from 'expo-router';
-import { TextInput } from '../../src/components/Input/styles';
-import StyledButton from '../../src/components/StyledButton';
 import { ViewLineAdmin } from '../../src/components/ViewLineAdmin';
 import { Text } from '../../src/global/Text';
 import themes from '../../src/themes';
