@@ -8,7 +8,6 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-
 /**
  * Hook to access and manage a firestore collection.
  * @param collectionName Collection name in plural (e.g. 'books'). Can also be a path to subcollection.
@@ -22,7 +21,6 @@ export default function useCollection<T extends { [x: string]: any }>(
   const db = getFirestore();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Array<T>>([]);
-
   /**
    * Create a new document in the collection.
    * @param newVal A new record of collection type.
@@ -32,7 +30,6 @@ export default function useCollection<T extends { [x: string]: any }>(
     const docRef = await addDoc(collection(db, collectionName), newVal);
     return docRef.id;
   };
-
   /**
    * Remove a document from collection.
    * @param id Document id to be removed.
@@ -40,7 +37,6 @@ export default function useCollection<T extends { [x: string]: any }>(
   const remove = async (id: string) => {
     await deleteDoc(doc(db, collectionName, id));
   };
-
   /**
    * Update a document in the collection.
    * @param id Document id to be updated.
@@ -50,7 +46,6 @@ export default function useCollection<T extends { [x: string]: any }>(
     if (newVal.id) delete newVal.id;
     await updateDoc(doc(db, collectionName, id), newVal);
   };
-
   /**
    * Get all documents from the collection.
    * @returns An array of the collection type with all elements.
@@ -66,19 +61,16 @@ export default function useCollection<T extends { [x: string]: any }>(
     setLoading(false);
     return dataAsMap;
   };
-
   /**
    * Alias to refetch all.
    */
   const refreshData = () => {
     all();
   };
-
   // Initial call to fill 'data' with all documents when precache is active.
   useEffect(() => {
     if (precache) all();
     // eslint-disable-next-line
   }, []);
-
   return { data, loading, create, remove, update, all, refreshData };
 }
