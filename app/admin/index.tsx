@@ -1,55 +1,66 @@
 import { useState } from 'react';
 import { FontAwesome5, FontAwesome, AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Header } from '../../src/components/Header';
-import useCollection from "../../src/hooks/useCollection";
-import Line from "../../src/types/Line";
-import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import useCollection from '../../src/hooks/useCollection';
+import Line from '../../src/types/Line';
+import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
+import useCollection from '../../src/hooks/useCollection';
+import Line from '../../src/types/Line';
+import { Alert, FlatList, StatusBar, StyleSheet, useColorScheme } from 'react-native';
 import {
   Container,
   LinesContainer,
   FormContainer,
   Footer,
   FooterContainer,
-  AdminButton,
   HomeButton,
 } from './styles';
-import { useRouter } from "expo-router";
+import { useRouter } from 'expo-router';
 import { TextInput } from '../../src/components/Input/styles';
 import StyledButton from '../../src/components/StyledButton';
 import { ViewLineAdmin } from '../../src/components/ViewLineAdmin';
+import { Text } from '../../src/global/Text';
+import themes from '../../src/themes';
+import { Input } from '../../src/components/Input';
+import { Button } from '../../src/components/Button';
 
 
 export default function Admin() {
-  const { data, create, remove, refreshData } = useCollection<Line>("lines");
+  const { data, create, remove, refreshData } = useCollection<Line>('lines');
   const router = useRouter();
-  const [lineName, setLineName] = useState('')
-  const [lineNumber, setLineNumber] = useState('')
+  const [lineName, setLineName] = useState('');
+  const [lineNumber, setLineNumber] = useState('');
+
+  const deviceTheme = useColorScheme();
+  const theme = themes[deviceTheme!] || theme.dark;
 
   return (
     <>
+      <StatusBar style='light' backgroundColor={theme.statusbar} />
       <Container>
-        <Header />
-
+        <Text
+          size={32}
+          weight={'600'}
+          color={theme.title}
+          style={{ marginTop: 62, textAlign: 'center'}}>
+            Cadastrar rotas
+        </Text>
         <FormContainer>
-          <Text>Cadastro de Linhas</Text>
+          <Input
+            placeholder='Digite o nome da linha'
+            keyboardType='email-address'
+            onChangeText={setLineName}
+            style={{ marginBottom: 24 }}
+          />
 
-          <ScrollView style={styles.scroll}>
-            <TextInput
-              style={styles.input}
-              onChangeText={setLineName}
-              value={lineName}
-              placeholder='nome linha'
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={setLineNumber}
-              value={lineNumber}
-              placeholder="numero linha"
-              keyboardType="numeric"
-            />
-          </ScrollView>
+          <Input
+            placeholder='Digite o numero da linha'
+            onChangeText={setLineNumber}
+            style={{ marginBottom: 24 }}
+          />
 
-          <StyledButton
+          <Button
             title="Cadastrar"
             onPress={async () => {
               try {
@@ -57,12 +68,12 @@ export default function Admin() {
                   name: lineName,
                   lineNumber: lineNumber,
                 });
-                Alert.alert("Criado com sucesso");
+                Alert.alert('Criado com sucesso');
 
                 await refreshData();
-                router.push("/admin");
+                router.push('/admin');
               } catch (error: any) {
-                Alert.alert("Create Line error", error.toString());
+                Alert.alert('Create Line error', error.toString());
               }
             }}
           />
@@ -92,15 +103,15 @@ export default function Admin() {
       <Footer>
         <FooterContainer>
           <HomeButton
-            onPress={() => router.push("/")}>
+            onPress={() => router.push('/')}>
             <FontAwesome5 name="home" size={40} color="black" />
           </HomeButton>
           <HomeButton
-            onPress={() => router.push("/admin")}>
+            onPress={() => router.push('/admin')}>
             <FontAwesome5 name="route" size={24} color="black" />
           </HomeButton>
           <HomeButton
-            onPress={() => router.push("/points")}>
+            onPress={() => router.push('/points')}>
             <FontAwesome name="hand-stop-o" size={24} color="black" />
           </HomeButton>
         </FooterContainer>

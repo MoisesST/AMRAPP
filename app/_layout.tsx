@@ -3,20 +3,21 @@
 import {
   Slot,
   SplashScreen, // Import `SplashScreen` from `expo-router` instead of `expo-splash-screen`
-} from "expo-router";
-import firebaseConfig from "../src/config/firebaseConfig";
-import useFirebase from "../src/hooks/useFirebase";
+} from 'expo-router';
+import firebaseConfig from '../src/config/firebaseConfig';
+import useFirebase from '../src/hooks/useFirebase';
 import { ThemeProvider } from 'styled-components/native';
-import ThemeContextProvider, { useThemeContext } from "../src/contexts/ThemeContext";
-import { PropsWithChildren } from "react";
+import themes from '../src/themes';
+import ThemeContextProvider, { useThemeContext } from '../src/contexts/ThemeContext';
+import { PropsWithChildren } from 'react';
 
 const ThemeProviderWrapper = ({children}:PropsWithChildren) => {
   const {theme} = useThemeContext();
 
   return (<ThemeProvider theme={theme}>
     {children}
-  </ThemeProvider>)
-}
+  </ThemeProvider>);
+};
 
 export default function Layout() {
   // Initialize firebase
@@ -31,11 +32,11 @@ export default function Layout() {
 
   // Render the children routes now that all the assets are loaded.
   return (
-    
+
     <ThemeContextProvider>
       <ThemeProviderWrapper>
-      <Slot />
+        <Slot />
       </ThemeProviderWrapper>
     </ThemeContextProvider>
-  ) 
+  );
 }

@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Header } from '../../src/components/Header';
-import { useRouter } from "expo-router";
-import useAuth from "../../src/hooks/useAuth";
-import StyledButton from '../../src/components/StyledButton';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import useAuth from '../../src/hooks/useAuth';
 import {
   Container,
   FormContainer,
@@ -11,50 +9,57 @@ import {
   FooterContainer,
   HomeButton,
 } from './styles';
-import { TextInput } from '../../src/components/Input/styles';
-import { Alert, ScrollView, StyleSheet } from "react-native";
-
-
+import { Alert, StatusBar, useColorScheme } from 'react-native';
+import { Input } from '../../src/components/Input';
+import { Text } from '../../src/global/Text';
+import themes from '../../src/themes';
+import { Button } from '../../src/components/Button';
 
 export default function Login() {
   const { login } = useAuth();
   const router = useRouter();
-  const [email, setEmail] = useState("user@example.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState('user@example.com');
+  const [password, setPassword] = useState('123456');
+
+  const deviceTheme = useColorScheme();
+  const theme = themes[deviceTheme!] || theme.dark;
 
   return (
     <>
+      <StatusBar style='light' backgroundColor={theme.statusbar} />
       <Container>
-        <Header />
-
+        <Text
+          size={32}
+          weight={'600'}
+          color={theme.title}
+          style={{ marginTop: 62, textAlign: 'center'}}>
+            Login
+        </Text>
         <FormContainer>
-          <ScrollView style={styles.scroll}>
-            <TextInput
-              style={styles.input}
-              onChangeText={setEmail}
-              value={email}
-              placeholder='email'
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={setPassword}
-              value={password}
-              placeholder="senha"
-            />
-          </ScrollView>
+          <Input
+            placeholder='Digite um email'
+            keyboardType='email-address'
+            onChangeText={setEmail}
+            style={{ marginBottom: 24 }}
+          />
 
-          <StyledButton
-            title="Login"
+          <Input
+            placeholder='Digite uma senha'
+            onChangeText={setPassword}
+            style={{ marginBottom: 24 }}
+          />
+
+          <Button
+            title='Enviar'
             onPress={async () => {
               try {
                 await login(email, password);
-                router.push("/admin");
+                router.push('/admin');
               } catch (error: any) {
-                Alert.alert("Login error", error.toString());
+                Alert.alert('Login error', error.toString());
               }
             }}
           />
-
         </FormContainer>
 
       </Container>
@@ -62,27 +67,12 @@ export default function Login() {
       <Footer>
         <FooterContainer>
           <HomeButton
-            onPress={() => router.push("/")}>
-            <FontAwesome5 name="home" size={40} color="black" />
+            onPress={() => router.push('/')}>
+            <FontAwesome5 name="home" size={40} color={theme.title} />
           </HomeButton>
         </FooterContainer>
       </Footer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: '#6666',
-    maxHeight: 50,
-    width: '100%',
-    borderWidth: 1,
-    margin: 5,
-  },
-  scroll: {
-    width: '100%',
-  },
-});
-
-
 export { Login };

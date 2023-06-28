@@ -17,7 +17,7 @@ import {
   SearchButton,
   AdminButton,
 } from './styles';
-import { useRouter } from "expo-router";
+import { useRouter } from 'expo-router';
 
 
 export default function Main() {
@@ -63,8 +63,8 @@ export default function Main() {
           </SearchButton>
 
           <AdminButton
-            onPress={() => router.push("/login")}>
-            <MaterialIcons name="admin-panel-settings" size={40} color="black" />
+            onPress={() => router.push('/login')}>
+            <MaterialIcons name="admin-panel-settings" size={40} color={theme.color} />
           </AdminButton>
         </FooterContainer>
       </Footer>

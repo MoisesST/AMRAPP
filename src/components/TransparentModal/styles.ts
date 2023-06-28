@@ -13,7 +13,6 @@ export const ModalBody = styled.View`
   border-radius: 8px;
   /* background: #fafafa; */
   background: ${props => props.theme.primary};
-
 `;
 
 export const CloseButton = styled.TouchableOpacity``;

@@ -22,7 +22,7 @@ function Header() {
       const currentPosition = await getCurrentPositionAsync();
       setLocation(currentPosition);
     } else {
-      alert('É necessário habilitar a localização.');
+      // alert('É necessário habilitar a localização.');
     }
   }
 
