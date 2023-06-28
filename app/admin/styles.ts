@@ -17,11 +17,10 @@ export const LinesContainer = styled.View`
 `;
 
 export const FormContainer = styled.View`
-  flex: 1;
-  justifyContent: center;
-  alignItems: center;
-  paddingHorizontal: 18px;
-  height: 50%;
+  height: 300px;
+  margin: 0 24px 24px;
+  padding: 24px;
+  border-radius: 8px;
 `;
 
 export const Footer = styled.View`

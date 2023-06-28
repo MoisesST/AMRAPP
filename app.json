@@ -1,32 +1,46 @@
 {
   "expo": {
-    "name": "app",
+    "name": "AMR",
     "slug": "app",
-    "version": "1.0.0",
+    "version": "1",
     "orientation": "portrait",
-    "icon": "./assets/image/icon.png",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/image/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fff"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/images/splash-ios.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#fff"
+      },
+      "android": {
+        "versionCode": 1,
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/images/adaptive-icon.png",
+          "backgroundColor": "#ffffff"
+        }
+      },
+      "web": {
+        "favicon": "./assets/images/favicon.png",
+        "bundler": "metro"
+      },
+      "scheme": "myapp"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/image/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+    "extra": {
+      "eas": {
+        "projectId": "c4cc7bea-6c06-43bf-acc7-6726ba28a943"
       }
     },
-    "web": {
-      "favicon": "./assets/image/favicon.png",
-      "bundler": "metro"
-    },
-    "scheme": "myapp"
+    "android": {
+      "package": "com.moises13.AMR"
+    }
   }
 }

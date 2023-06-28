@@ -6,9 +6,10 @@ interface InputProps {
   onChangeText: any; // revisar
   // onChangeText: () => void;
   keyboardType?: 'number-pad' | 'email-address';
+  style?: any;
 }
 
-function Input({ placeholder, keyboardType, onChangeText }: InputProps) {
+function Input({ placeholder, keyboardType, onChangeText, style }: InputProps) {
   const {theme} = useThemeContext();
 
   return (
@@ -17,6 +18,7 @@ function Input({ placeholder, keyboardType, onChangeText }: InputProps) {
       placeholderTextColor={theme.color}
       keyboardType={keyboardType ? keyboardType : 'default'}
       onChangeText={onChangeText}
+      style={style ? style : ''}
     />
   );
 }

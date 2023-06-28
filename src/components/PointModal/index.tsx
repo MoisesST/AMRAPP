@@ -70,7 +70,7 @@ function PointModal({ visible, onClose, point }: PointModalProps) {
       >
         <Image
           source={{
-            uri: 'https://s2.glbimg.com/F7yvdswolNWTG-FHLQdJNiLMelI=/0x0:1600x1200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2020/t/7/1Fm9BwQ4GgQL5g7ZGblg/shopping.jpg'
+            uri: 'https://fontawesome.com/social/location-dot?f=&s=solid'
           }}
         >
           <CloseButton onPress={onClose}>
