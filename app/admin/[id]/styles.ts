@@ -11,15 +11,9 @@ export const Container = styled.SafeAreaView`
   background: ${props => props.theme.primary};
 `;
 
-export const LinesContainer = styled.View`
-  flex: 1;
-  /* margin-top: 34px; */
-`;
-
 export const FormContainer = styled.View`
   height: 300px;
   margin: 0 24px 24px;
-  padding: 24px 0;
   border-radius: 8px;
 `;
 
@@ -35,8 +29,4 @@ export const FooterContainer = styled.SafeAreaView`
   align-items: center;
 `;
 
-export const AdminButton = styled.TouchableOpacity``;
-
 export const HomeButton = styled.TouchableOpacity``;
-
-export const SubmitButton = styled.TouchableOpacity``;

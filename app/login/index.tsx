@@ -26,7 +26,7 @@ export default function Login() {
 
   return (
     <>
-      <StatusBar style='light' backgroundColor={theme.statusbar} />
+      <StatusBar barStyle={'light-content'} backgroundColor={theme.statusbar} />
       <Container>
         <Text
           size={32}
@@ -68,7 +68,7 @@ export default function Login() {
         <FooterContainer>
           <HomeButton
             onPress={() => router.push('/')}>
-            <FontAwesome5 name="home" size={40} color={theme.title} />
+            <FontAwesome5 name="home" size={40} color={theme.color} />
           </HomeButton>
         </FooterContainer>
       </Footer>

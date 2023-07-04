@@ -1,29 +1,32 @@
 import { useState } from 'react';
-import { FontAwesome5, FontAwesome, AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Header } from '../../src/components/Header';
-import useCollection from "../../src/hooks/useCollection";
-import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import useCollection from '../../src/hooks/useCollection';
+import { Alert, FlatList, StatusBar } from 'react-native';
 import {
   Container,
-  LinesContainer,
   FormContainer,
   Footer,
   FooterContainer,
   HomeButton,
   LinesContainerList,
+  LinesContainer
 } from './styles';
-import { useRouter } from "expo-router";
-import { TextInput } from '../../src/components/Input/styles';
-import StyledButton from '../../src/components/StyledButton';
-import { ViewPointAdmin } from '../../src/components/ViewPointAdmin';
+import { useRouter } from 'expo-router';
 import { Lines } from '../../src/components/Lines';
-import Point from "../../src/types/Point";
+import Point from '../../src/types/Point';
+import { useThemeContext } from '../../src/contexts/ThemeContext';
+import { Text } from '../../src/global/Text';
+import { Input } from '../../src/components/Input';
+import { Button } from '../../src/components/Button';
+import { LineEdit } from '../../src/components/LineEdit';
+import { Separator } from '../../src/components/Points/styles';
+import { ViewPointAdmin } from '../../src/components/ViewPointAdmin';
 
 
 export default function Admin() {
   const router = useRouter();
-  const { data, create, remove, refreshData } = useCollection<Point>("points");
-  const [paradaName, setParadaName] = useState('')
+  const { data, create, remove, refreshData } = useCollection<Point>('points');
+  const [paradaName, setParadaName] = useState('');
   const [selectedLine, setSelectedLine] = useState('');
   const [dataShow, setDataShow] = useState(data);
 
@@ -34,41 +37,42 @@ export default function Admin() {
     setDataShow(filteredArray);
   };
 
+  const {theme} = useThemeContext();
+
   return (
     <>
+      <StatusBar barStyle={'light-content'} backgroundColor={theme.statusbar} />
+
       <Container>
-        <Header />
+        <Text
+          size={32}
+          weight={'600'}
+          color={theme.title}
+          style={{ marginVertical: 24, textAlign: 'center'}}
+        >
+          Paradas
+        </Text>
 
         <FormContainer>
-          <Text>Cadastro de Paradas</Text>
-
-          <Text>1º Selecione a parada</Text>
-
-          <LinesContainerList>
+          <LinesContainerList style={{ marginBottom: 24 }}>
             <Lines onLineSelect={handleLineSelect} />
           </LinesContainerList>
 
-          <ScrollView style={styles.scroll}>
-            <TextInput
-              style={styles.input}
-              value={"ID:.." + selectedLine}
-              placeholder='ID da linha'
-              editable={false}
-            />
+          <Input
+            value={'ID:..' + selectedLine}
+            placeholder='ID da linha'
+            editable={false}
+            style={{ marginBottom: 24 }}
+          />
 
-            <Text>2º Cadastrar uma parada</Text>
+          <Input
+            onChangeText={setParadaName}
+            value={paradaName}
+            placeholder="Nome da parada"
+            style={{ marginBottom: 24 }}
+          />
 
-            <TextInput
-              style={styles.input}
-              onChangeText={setParadaName}
-              value={paradaName}
-              placeholder="Nome da parada"
-            />
-
-          </ScrollView>
-
-          <Text>3º Cadastrar uma nova parada</Text>
-          <StyledButton
+          <Button
             title="Cadastrar"
             onPress={async () => {
               try {
@@ -77,17 +81,16 @@ export default function Admin() {
                   name: paradaName,
                   schedules: [],
                 });
-                Alert.alert("Ponto cadastrada com sucesso");
+                Alert.alert('Ponto cadastrada com sucesso');
                 setParadaName('');
                 setSelectedLine('');
                 await refreshData();
               } catch (error: any) {
-                Alert.alert("Erro ao cadastrar o ponto", error.toString());
+                Alert.alert('Erro ao cadastrar o ponto', error.toString());
               }
             }}
           />
         </FormContainer>
-
         <LinesContainer>
           <FlatList
             showsVerticalScrollIndicator
@@ -105,38 +108,40 @@ export default function Admin() {
             )}
           />
         </LinesContainer>
-
+        {/* <FlatList
+          showsVerticalScrollIndicator
+          data={dataShow}
+          contentContainerStyle={{ paddingHorizontal: 24 }}
+          ItemSeparatorComponent={Separator}
+          renderItem={({ item }) => (
+            <LineEdit
+              line={item}
+              link='points'
+              onDelete={async () => {
+                await remove(item.id!);
+                await refreshData();
+              }}
+            />
+          )}
+        /> */}
       </Container>
 
       <Footer>
         <FooterContainer>
           <HomeButton
-            onPress={() => router.push("/")}>
-            <FontAwesome5 name="home" size={40} color="black" />
+            onPress={() => router.push('/')}>
+            <FontAwesome5 name="home" size={40} color={theme.color} />
           </HomeButton>
           <HomeButton
-            onPress={() => router.push("/admin")}>
-            <FontAwesome5 name="route" size={24} color="black" />
+            onPress={() => router.push('/admin')}>
+            <FontAwesome5 name="route" size={24} color={theme.color} />
           </HomeButton>
           <HomeButton
-            onPress={() => router.push("/points")}>
-            <FontAwesome name="hand-stop-o" size={24} color="black" />
+            onPress={() => router.push('/points')}>
+            <FontAwesome name="hand-stop-o" size={24} color={theme.color} />
           </HomeButton>
         </FooterContainer>
       </Footer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: '#6666',
-    maxHeight: 50,
-    width: '100%',
-    borderWidth: 1,
-    margin: 5,
-  },
-  scroll: {
-    width: '100%',
-  },
-});

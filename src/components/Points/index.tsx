@@ -6,10 +6,10 @@ import { PointModal } from '../PointModal';
 import { Text } from '../../global/Text';
 import { Container, Separator } from './styles';
 import { useThemeContext } from '../../contexts/ThemeContext';
-import Point from "../../types/Point";
-import Line from "../../types/Line";
-import useCollection from "../../hooks/useCollection";
-import { useRouter } from "expo-router";
+import Point from '../../types/Point';
+import Line from '../../types/Line';
+import useCollection from '../../hooks/useCollection';
+import { useRouter } from 'expo-router';
 interface PointsProps {
   //onLineSelect: (lineId: string) => void; //line id passado por parametro
   lineId?: string;
@@ -18,7 +18,7 @@ interface PointsProps {
 }
 function Points({ lineId, point, onDelete }: PointsProps) {
   const router = useRouter();
-  const { data, create, remove, refreshData } = useCollection<Point>("points");
+  const { data, create, remove, refreshData } = useCollection<Point>('points');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedPoint, setSelectedPoint] = useState<null | Point>(null);
   function handleOpenModal(point: Point) {
@@ -27,13 +27,13 @@ function Points({ lineId, point, onDelete }: PointsProps) {
   }
   const [dataShow, setDataShow] = useState(data);
   useEffect(() => {
-    filtroPoints(lineId as string)
+    filtroPoints(lineId as string);
   }, [lineId]);
   const [selectedLine, setSelectedLine] = useState('');
   const filtroPoints = (lineId: string) => {
     const filteredArray = data.filter((item) => item.lineId === lineId);
     setDataShow(filteredArray);
-  }
+  };
   const now = new Date();
   const options = { timeZone: 'America/Sao_Paulo' };
   const currentTime = now.toLocaleTimeString('pt-BR', options);

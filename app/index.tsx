@@ -22,10 +22,12 @@ function App() {
   }
 
   return (
-    <ThemeContextProvider>
+    <>
       <StatusBar style='light' backgroundColor={theme.statusbar} />
-      <Main />
-    </ThemeContextProvider>
+      <ThemeContextProvider>
+        <Main />
+      </ThemeContextProvider>
+    </>
   );
 }
 

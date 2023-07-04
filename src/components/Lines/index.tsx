@@ -2,28 +2,27 @@ import { useState } from 'react';
 import { FlatList } from 'react-native';
 import { Text } from '../../global/Text';
 import { LineStyled } from './styles';
-import useCollection from "../../hooks/useCollection";
-import Line from "../../types/Line";
-import { useRouter } from "expo-router";
+import useCollection from '../../hooks/useCollection';
+import Line from '../../types/Line';
+import { useRouter } from 'expo-router';
 
 interface LinesProps {
   onLineSelect: (lineId: string) => void;
   line?: Line;
-  onDelete?: Function;
+  onDelete?: any;
 }
 
 function Lines({onLineSelect, line, onDelete} : LinesProps) {
   const router = useRouter();
-  const { data, create, remove, refreshData  } = useCollection<Line>("lines");
-  
+  const { data, create, remove, refreshData  } = useCollection<Line>('lines');
+
   const [selectedLine, setSelectedLine] = useState('');
 
   const handleSelectLine = (lineId: string) => {
     const line = selectedLine === lineId ? '' : lineId;
     setSelectedLine(line);
     onLineSelect(lineId);
-    //console.log("################Linha id..........." + line);
-  }
+  };
 
   return (
     <FlatList

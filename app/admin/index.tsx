@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import useCollection from '../../src/hooks/useCollection';
 import Line from '../../src/types/Line';
-import { Alert, FlatList, StatusBar, StyleSheet, useColorScheme } from 'react-native';
+import { Alert, FlatList, StatusBar, useColorScheme } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import {
   Container,
@@ -13,11 +13,12 @@ import {
   HomeButton,
 } from './styles';
 import { useRouter } from 'expo-router';
-import { ViewLineAdmin } from '../../src/components/ViewLineAdmin';
 import { Text } from '../../src/global/Text';
 import themes from '../../src/themes';
 import { Input } from '../../src/components/Input';
 import { Button } from '../../src/components/Button';
+import { LineEdit } from '../../src/components/LineEdit';
+import { Separator } from '../../src/components/Points/styles';
 
 
 export default function Admin() {
@@ -31,14 +32,14 @@ export default function Admin() {
 
   return (
     <>
-      <StatusBar style='light' backgroundColor={theme.statusbar} />
+      <StatusBar barStyle={'light-content'} backgroundColor={theme.statusbar} />
       <Container>
         <Text
           size={32}
           weight={'600'}
           color={theme.title}
-          style={{ marginTop: 62, textAlign: 'center'}}>
-            Cadastrar rotas
+          style={{ marginTop: 24, textAlign: 'center'}}>
+            Rotas
         </Text>
         <FormContainer>
           <Input
@@ -76,12 +77,11 @@ export default function Admin() {
         <LinesContainer>
           <FlatList
             showsVerticalScrollIndicator
-            //horizontal showsHorizontalScrollIndicator={false}
             data={data}
-            contentContainerStyle={{ paddingRight: 24 }}
+            contentContainerStyle={{ paddingHorizontal: 24 }}
+            ItemSeparatorComponent={Separator}
             renderItem={({ item }) => (
-              // const isSelected = selectedLine === line.id!;
-              <ViewLineAdmin
+              <LineEdit
                 line={item}
                 onDelete={async () => {
                   await remove(item.id!);
@@ -98,31 +98,18 @@ export default function Admin() {
         <FooterContainer>
           <HomeButton
             onPress={() => router.push('/')}>
-            <FontAwesome5 name="home" size={40} color="black" />
+            <FontAwesome5 name="home" size={40} color={theme.color} />
           </HomeButton>
           <HomeButton
             onPress={() => router.push('/admin')}>
-            <FontAwesome5 name="route" size={24} color="black" />
+            <FontAwesome5 name="route" size={24} color={theme.color} />
           </HomeButton>
           <HomeButton
             onPress={() => router.push('/points')}>
-            <FontAwesome name="hand-stop-o" size={24} color="black" />
+            <FontAwesome name="hand-stop-o" size={24} color={theme.color} />
           </HomeButton>
         </FooterContainer>
       </Footer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: '#6666',
-    maxHeight: 50,
-    width: '100%',
-    borderWidth: 1,
-    margin: 5,
-  },
-  scroll: {
-    width: '100%',
-  },
-});

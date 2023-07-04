@@ -1,9 +1,9 @@
-import { View, Alert, StyleSheet } from "react-native";
+import { View, Alert, StyleSheet } from 'react-native';
 import { Text } from '../global/Text';
-import StyledButton from "./StyledButton";
-import useCollection from "../hooks/useCollection";
-import Line from "../types/Line";
-import { useRouter } from "expo-router";
+import StyledButton from './StyledButton';
+import useCollection from '../hooks/useCollection';
+import Line from '../types/Line';
+import { useRouter } from 'expo-router';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
@@ -28,47 +28,47 @@ function ViewLineAdmin({ line, onDelete }: ViewLineAdminProps) {
         </Text>
       </LineStyled>
 
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: 'row' }}>
         <StyledButton
           title="Detalhes"
           onPress={() => {
             if (line.id) {
-              console.log(">>>>>>>>>", line)
-              router.push("/admin/" + line.id);
+              console.log('>>>>>>>>>', line);
+              router.push('/admin/' + line.id);
             } else {
               Alert.alert(
-                "View error",
-                "cannot access Lines details because it does not have an id!"
+                'View error',
+                'cannot access Lines details because it does not have an id!'
               );
             }
           }}
-          style={{ width: "50%" }}
+          style={{ width: '50%' }}
         />
 
         <StyledButton
           title="Deletar"
           onPress={() => {
             if (line.id) {
-              Alert.alert("Deletar linha", "tem certeza?", [
+              Alert.alert('Deletar linha', 'tem certeza?', [
                 {
-                  text: "Sim",
+                  text: 'Sim',
                   onPress: async () => {
                     onDelete();
                   },
                 },
                 {
-                  text: "No",
-                  style: "cancel",
+                  text: 'No',
+                  style: 'cancel',
                 },
               ]);
             } else {
               Alert.alert(
-                "delete error",
-                "cannot delete book because it does not have an id!"
+                'delete error',
+                'cannot delete book because it does not have an id!'
               );
             }
           }}
-          style={{ width: "50%", backgroundColor: "darkred" }}
+          style={{ width: '50%', backgroundColor: 'darkred' }}
         />
       </View>
     </View>

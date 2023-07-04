@@ -1,34 +1,38 @@
 import { useEffect, useState } from 'react';
-import { FontAwesome5, FontAwesome, AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Header } from '../../../src/components/Header';
-import useDocument from "../../../src/hooks/useDocument";
-import Point from "../../../src/types/Point";
-import { Alert, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import useDocument from '../../../src/hooks/useDocument';
+import Point from '../../../src/types/Point';
+import { Alert, FlatList, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import {
   Container,
-  LinesContainer,
   FormContainer,
   Footer,
   FooterContainer,
   HomeButton,
-} from '../styles';
-import { Stack, useRouter, useSearchParams } from "expo-router";
-import { TextInput } from '../../../src/components/Input/styles';
+  InLineContainer,
+  EditContainer,
+  RecordContainer,
+  LinesContainer,
+  LineStyled
+} from './styles';
+import { useRouter, useSearchParams } from 'expo-router';
 import StyledButton from '../../../src/components/StyledButton';
 import styled from 'styled-components/native';
-
+import { useThemeContext } from '../../../src/contexts/ThemeContext';
+import { Text } from '../../../src/global/Text';
+import { Input } from '../../../src/components/Input';
+import { Button } from '../../../src/components/Button';
+import { Feather } from '@expo/vector-icons';
 
 export default function PointsDetails() {
-
   const { id } = useSearchParams();
   const router = useRouter();
 
-  // for convenience, you can extract data and rename it to "book" by typing data:your_alias_for_data
   const {
     data: point,
     loading,
     upsert,
-  } = useDocument<Point>("points", id as string);
+  } = useDocument<Point>('points', id as string);
 
   const [pointName, setPointName] = useState('');
   const [pointSchedular, setPointSchedular] = useState<string[]>(point?.schedules || []);
@@ -39,78 +43,104 @@ export default function PointsDetails() {
     setPointSchedular(updatedSchedules);
   };
 
-
   useEffect(() => {
     if (point) {
       setPointName(point.name);
       setPointSchedular(point.schedules);
     }
-  }, [point])
+  }, [point]);
 
-  console.log("linha 51..point name...", pointName, " poinschedular", pointSchedular);
+  console.log('linha 51..point name...', pointName, ' poinschedular', pointSchedular);
 
   if (loading || !point) return <Text>Garregando...</Text>;
 
+  const {theme} = useThemeContext();
 
   return (
     <>
+      <StatusBar barStyle={'light-content'} backgroundColor={theme.statusbar} />
       <Container>
-        <Header />
+        <Text
+          size={32}
+          weight={'600'}
+          color={theme.title}
+          style={{ marginVertical: 24, textAlign: 'center'}}
+        >
+          Horários
+        </Text>
 
         <FormContainer>
-          <Text>Edição de Parada e Horários</Text>
+          <Text
+            weight='600' color={theme.color} style={{ marginBottom: 10}}
+          >
+            Novo nome da parada
+          </Text>
 
-          <ScrollView style={styles.scroll}>
-            <TextInput
-              style={styles.input}
-              onChangeText={setPointName}
-              value={pointName}
-              placeholder='nome da parada'
-            />
+          <InLineContainer>
+            <EditContainer>
+              <Input
+                // style={{ marginBottom: 24}}
+                onChangeText={setPointName}
+                value={pointName}
+                placeholder='nome da parada'
+              />
+            </EditContainer>
 
-            <StyledButton
-              title="Editar"
-              onPress={async () => {
-                try {
-                  await upsert({
-                    ...point, // repeating the existing line object
-                    name: pointName, // updating
-                  });
-                  Alert.alert("Editado com sucesso");
-                  router.push("/points");
-                } catch (error: any) {
-                  Alert.alert("Update Point error", error.toString());
-                }
-              }}
-            />
 
-            <Text>2º Cadastrar hora</Text>
+            <RecordContainer>
+              <Button
+                onPress={async () => {
+                  try {
+                    await upsert({
+                      ...point, // repeating the existing line object
+                      name: pointName, // updating
+                    });
+                    Alert.alert('Editado com sucesso');
+                    router.push('/points');
+                  } catch (error: any) {
+                    Alert.alert('Update Point error', error.toString());
+                  }
+                }}
+              >
+                <Feather name="edit" size={30} color={theme.icons} />
+              </Button>
+            </RecordContainer>
+          </InLineContainer>
 
-            <TextInput
-              style={styles.input}
-              onChangeText={setPointSchedularteste}
-              value={pointSchedularteste}
-              placeholder="ex:.. 18:15"
-            />
-            <StyledButton
-              title="Cadastrar horário"
-              onPress={async () => {
-                point.schedules.push(pointSchedularteste);
-                setPointSchedular(point.schedules);
-                try {
-                  await upsert({
-                    ...point, // repeating the existing line object
-                    //name: pointName, // updating
-                    schedules: pointSchedular,
-                  });
-                  Alert.alert("Horário cadastrado com sucesso");
-                  router.push("/points");
-                } catch (error: any) {
-                  Alert.alert("Update Point error", error.toString());
-                }
-              }}
-            />
-          </ScrollView>
+          <Text
+            weight='600' color={theme.color} style={{ marginBottom: 10}}
+          >
+            Adicione um horário
+          </Text>
+
+          <Input
+            style={{ marginBottom: 24}}
+            onChangeText={setPointSchedularteste}
+            value={pointSchedularteste}
+            placeholder="ex:.. 18:15"
+          />
+
+          <Button
+            title="Cadastrar horário"
+            onPress={async () => {
+              point.schedules.push(pointSchedularteste);
+              setPointSchedular(point.schedules);
+              try {
+                await upsert({
+                  ...point, // repeating the existing line object
+                  //name: pointName, // updating
+                  schedules: pointSchedular,
+                });
+                Alert.alert('Horário cadastrado com sucesso');
+                router.push('/points');
+              } catch (error: any) {
+                Alert.alert('Update Point error', error.toString());
+              }
+            }}
+          />
+
+
+
           <LinesContainer>
             <FlatList
               showsVerticalScrollIndicator
@@ -118,8 +148,8 @@ export default function PointsDetails() {
               contentContainerStyle={{ paddingRight: 24 }}
               renderItem={({ item }) => (
 
-                <View style={styles.points}>
-                  <LineStyled >
+                <View>
+                  <>
                     <Text
                       color='orange'
                       size={14}
@@ -128,9 +158,9 @@ export default function PointsDetails() {
                     >
                       {item}
                     </Text>
-                  </LineStyled>
+                  </>
 
-                  <View style={{ flexDirection: "row" }}>
+                  <View style={{ flexDirection: 'row', height:64 }}>
 
                     <StyledButton
                       title="Deletar Hora"
@@ -142,73 +172,38 @@ export default function PointsDetails() {
                             //name: pointName, // updating
                             schedules: pointSchedular,
                           });
-                          Alert.alert("Horário removido com sucesso");
-                          router.push("/points");
+                          Alert.alert('Horário removido com sucesso');
+                          router.push('/points');
                         } catch (error: any) {
-                          Alert.alert("Update Point error", error.toString());
+                          Alert.alert('Update Point error', error.toString());
                         }
                       }}
-                      style={{ width: "50%", backgroundColor: "darkred" }}
+                      style={{ width: '50%', backgroundColor: 'darkred' }}
                     />
                   </View>
                 </View>
               )}
             />
           </LinesContainer>
-
-
-
         </FormContainer>
-
       </Container >
 
       <Footer>
         <FooterContainer>
           <HomeButton
-            onPress={() => router.push("/")}>
-            <FontAwesome5 name="home" size={40} color="black" />
+            onPress={() => router.push('/')}>
+            <FontAwesome5 name="home" size={40} color={theme.color} />
           </HomeButton>
           <HomeButton
-            onPress={() => router.push("/admin")}>
-            <FontAwesome5 name="route" size={24} color="black" />
+            onPress={() => router.push('/admin')}>
+            <FontAwesome5 name="route" size={24} color={theme.color} />
           </HomeButton>
           <HomeButton
-            onPress={() => router.push("/points")}>
-            <FontAwesome name="hand-stop-o" size={24} color="black" />
+            onPress={() => router.push('/points')}>
+            <FontAwesome name="hand-stop-o" size={24} color={theme.color} />
           </HomeButton>
         </FooterContainer>
       </Footer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: '#6666',
-    maxHeight: 50,
-    width: '100%',
-    borderWidth: 1,
-    margin: 5,
-  },
-  scroll: {
-    width: '100%',
-  },
-  points: {
-    paddingBottom: 10,
-    margin: 5,
-    alignItems: 'center',
-  },
-});
-
-const isAndroid = Platform.OS === 'android';
-
-const LineStyled = styled.TouchableOpacity`
-  width: 350px;
-  margin-left: 24px;
-  padding: 5px;
-  background: #000;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  box-shadow: 0px 2px 1px rgba(0, 0, 0, ${isAndroid ? 1 : 0.1});
-`;

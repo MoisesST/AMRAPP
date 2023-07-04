@@ -18,6 +18,7 @@ import {
   AdminButton,
 } from './styles';
 import { useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 
 
 export default function Main() {
@@ -35,50 +36,53 @@ export default function Main() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        <Header />
+    <>
+      <StatusBar style='light' backgroundColor={theme.statusbar} />
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Header />
 
-        <LinesContainer>
-          <Lines onLineSelect={handleLineSelect} />
-        </LinesContainer>
+          <LinesContainer>
+            <Lines onLineSelect={handleLineSelect} />
+          </LinesContainer>
 
-        <PointsContainer>
-          <Points lineId={selectedLine} />
-        </PointsContainer>
-      </Container>
+          <PointsContainer>
+            <Points lineId={selectedLine} />
+          </PointsContainer>
+        </Container>
 
-      <Footer>
-        <FooterContainer>
-          <MapButton
-            onPress={() => setMapModalVisible(true)}
-          >
-            <FontAwesome5 name="map" size={40} color={theme.color} />
-          </MapButton>
+        <Footer>
+          <FooterContainer>
+            <MapButton
+              onPress={() => setMapModalVisible(true)}
+            >
+              <FontAwesome5 name="map" size={40} color={theme.color} />
+            </MapButton>
 
-          <SearchButton
-            onPress={() => setSearchModalVisible(true)}
-          >
-            <Ionicons name="md-search" size={40} color={theme.color} />
-          </SearchButton>
+            <SearchButton
+              onPress={() => setSearchModalVisible(true)}
+            >
+              <Ionicons name="md-search" size={40} color={theme.color} />
+            </SearchButton>
 
-          <AdminButton
-            onPress={() => router.push('/login')}>
-            <MaterialIcons name="admin-panel-settings" size={40} color={theme.color} />
-          </AdminButton>
-        </FooterContainer>
-      </Footer>
+            <AdminButton
+              onPress={() => router.push('/login')}>
+              <MaterialIcons name="admin-panel-settings" size={40} color={theme.color} />
+            </AdminButton>
+          </FooterContainer>
+        </Footer>
 
-      <MapModal
-        visible={isMapModalVisible}
-        onClose={() => setMapModalVisible(false)}
-      />
+        <MapModal
+          visible={isMapModalVisible}
+          onClose={() => setMapModalVisible(false)}
+        />
 
-      <SearchModal
-        visible={isSearchModalVisible}
-        onClose={() => setSearchModalVisible(false)}
-      />
-    </ThemeProvider>
+        <SearchModal
+          visible={isSearchModalVisible}
+          onClose={() => setSearchModalVisible(false)}
+        />
+      </ThemeProvider>
+    </>
   );
 }
 export { Main };

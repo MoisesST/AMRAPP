@@ -20,20 +20,20 @@
         "image": "./assets/images/splash-ios.png",
         "resizeMode": "contain",
         "backgroundColor": "#fff"
-      },
-      "android": {
-        "versionCode": 1,
-        "adaptiveIcon": {
-          "foregroundImage": "./assets/images/adaptive-icon.png",
-          "backgroundColor": "#ffffff"
-        }
-      },
-      "web": {
-        "favicon": "./assets/images/favicon.png",
-        "bundler": "metro"
-      },
-      "scheme": "myapp"
+      }
     },
+    "android": {
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png",
+      "bundler": "metro"
+    },
+    "scheme": "myapp",
     "extra": {
       "eas": {
         "projectId": "c4cc7bea-6c06-43bf-acc7-6726ba28a943"

@@ -1,8 +1,8 @@
-import { View, Alert, StyleSheet } from "react-native";
+import { View, Alert, StyleSheet } from 'react-native';
 import { Text } from '../global/Text';
-import StyledButton from "./StyledButton";
-import Point from "../types/Point";
-import { useRouter } from "expo-router";
+import StyledButton from './StyledButton';
+import Point from '../types/Point';
+import { useRouter } from 'expo-router';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
@@ -23,51 +23,51 @@ function ViewPointAdmin({ point, onDelete }: ViewPointAdminProps) {
           weight='600'
         //opacity={isSelected ? 1 : 0.5}
         >
-         {point.name}
+          {point.name}
         </Text>
       </LineStyled>
 
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: 'row' }}>
         <StyledButton
           title="Editar/Horários"
           onPress={() => {
             if (point.id) {
-              console.log(">>>>>>>>>", point)
-              router.push("/points/" + point.id);
+              console.log('>>>>>>>>>', point);
+              router.push('/points/' + point.id);
             } else {
               Alert.alert(
-                "View error",
-                "cannot access Point details because it does not have an id!"
+                'View error',
+                'cannot access Point details because it does not have an id!'
               );
             }
           }}
-          style={{ width: "50%" }}
+          style={{ width: '50%' }}
         />
 
         <StyledButton
           title="Deletar"
           onPress={() => {
             if (point.id) {
-              Alert.alert("Deletar parada", "tem certeza?", [
+              Alert.alert('Deletar parada', 'tem certeza?', [
                 {
-                  text: "Sim",
+                  text: 'Sim',
                   onPress: async () => {
                     onDelete();
                   },
                 },
                 {
-                  text: "No",
-                  style: "cancel",
+                  text: 'No',
+                  style: 'cancel',
                 },
               ]);
             } else {
               Alert.alert(
-                "delete error",
-                "cannot delete stop because it does not have an id!"
+                'delete error',
+                'cannot delete stop because it does not have an id!'
               );
             }
           }}
-          style={{ width: "50%", backgroundColor: "darkred" }}
+          style={{ width: '50%', backgroundColor: 'darkred' }}
         />
       </View>
     </View>
